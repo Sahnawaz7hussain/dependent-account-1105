@@ -1,0 +1,4 @@
+Farman Malik - Backend.
+Bharat - Homepage
+Sahnawaz - cart , payment.
+Mehfooz - Productpage & signgle product.
