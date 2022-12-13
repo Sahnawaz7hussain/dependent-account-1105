@@ -1,7 +1,12 @@
-import React from "react";
+import React , {useEffect, useState}  from "react";
 
-const Productspage = () => {
-  return <div>Productspage</div>;
+const ProductPage = () => {
+
+
+  
+  return(<>
+  <h1>Data we have to put mehfooz khan</h1>
+  </>)
 };
 
-export default Productspage;
+export default ProductPage;
