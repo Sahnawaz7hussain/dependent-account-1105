@@ -1,12 +1,20 @@
-//import { applyMiddleware, compose, legacy_createStore } from "redux";
-//import thunk from "redux-thunk";
+import {
+  applyMiddleware,
+  combineReducers,
+  compose,
+  legacy_createStore,
+} from "redux";
+import thunk from "redux-thunk";
+import { reducer as cartReducer } from "./CartReducer/cartReducer";
+import { reducer as addressReducer } from "./AddressReducer/addressReducer";
 
-//const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const rootReducer = combineReducers({
+  cartReducer,
+  addressReducer,
+});
 
-// export const store = legacy_createStore(
-//   dummyReducer,
-//   composeEnhancers(applyMiddleware(thunk))
-// );
-
-//export const store = legacy_createStore({});
-const dummyStore = "dummy";
+export const store = legacy_createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
