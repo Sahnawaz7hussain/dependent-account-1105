@@ -13,41 +13,49 @@ import { BrandStore } from "../Components/Homepage/BrandStore";
 import Read from "../Components/Homepage/Read.jsx";
 import { Menus } from "../Components/Homepage/Menus";
 
-
 const Homepage = () => {
   return (
-    <div style={{width:"80%", margin:"auto"}}>
-      <br /><br />
+    <div style={{ width: "80%", margin: "auto" }}>
+      <br />
+      <br />
       <Slider />
-      <br /><br />
+      <br />
+      <br />
       <Menus />
       <br /> <br />
       <BankOffers />
-      <br /><br />
+      <br />
+      <br />
       <TopOffers />
-      <br /><br />
+      <br />
+      <br />
       <FruitsandVegetables />
-      <br /><br />
+      <br />
+      <br />
       <YourDailyStaples />
-      <br /><br />
+      <br />
+      <br />
       <Beverages />
-      <br /><br />
-      <SnacksStore /> 
-      <br /><br />
+      <br />
+      <br />
+      <SnacksStore />
+      <br />
+      <br />
       <CleaningHousehold />
-      <br /><br />
+      <br />
+      <br />
       <BeautyandHygiene />
-      <br /><br />
+      <br />
+      <br />
       <BottomCarousel />
-      <br /><br />
+      <br />
+      <br />
       <BrandStore />
       <br /> <br />
       <Read />
       <br /> <br />
-      
     </div>
   );
 };
-
 
 export default Homepage;

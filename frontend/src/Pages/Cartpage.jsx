@@ -4,6 +4,7 @@ import { BillingDetails } from "../Components/Cartpage/BillingDetails";
 import { CartProductDetails } from "../Components/Cartpage/CartProductDetails";
 
 const Cartpage = () => {
+  document.title = "Finest | Cart Items";
   return (
     <Box
       display={{ base: "block", md: "flex", xl: "flex" }}
@@ -12,6 +13,7 @@ const Cartpage = () => {
       w={{ base: "95%", md: "95%", xl: "90%" }}
       p="0px"
       m="auto"
+      mt="20px"
     >
       <CartProductDetails />
       <BillingDetails />
