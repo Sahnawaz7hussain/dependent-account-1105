@@ -7,7 +7,6 @@ import {
   Input,
   Radio,
   RadioGroup,
-  SimpleGrid,
   Spacer,
   Text,
 } from "@chakra-ui/react";
@@ -101,7 +100,7 @@ const PaymentMethod = () => {
                   borderBottom="1px solid lightgrey"
                   // border="2px solid grey"
                 >
-                  <Radio colorScheme={"pink"} ml="15px" value={el.method}>
+                  <Radio ml="15px" value={el.method}>
                     {el.content}
                   </Radio>
                 </Flex>
@@ -116,10 +115,17 @@ const PaymentMethod = () => {
         {pmethod === "card" && <PayingCard />}
         {pmethod === "cod" && (
           <Box boxSizing="border-box" p="20px" mt="15px ">
-            <Heading my="15px" size={"xl"} color={"green"}>
-              Payable ₹500
+            <Heading mt="15px" size={"md"} color={"green"}>
+              Payable amount ₹500
             </Heading>
-            <Button colorScheme={"pink"} rounded={"none"} w="100%">
+            <Button
+              _hover={{ bg: "brand.200" }}
+              mt={"50px"}
+              bg={"brand.100"}
+              color={"brand.white"}
+              rounded={"none"}
+              w="100%"
+            >
               PLACE ORDER
             </Button>
           </Box>
@@ -128,13 +134,20 @@ const PaymentMethod = () => {
         {pmethod === "upi" && (
           <Box boxSizing="border-box" p="20px" mt="15px ">
             <Heading my="15px" size={"md"} color={"green"}>
-              Payable ₹500
+              Payable amount ₹500
             </Heading>
             <Input variant={"flushed"} placeholder="user@bankname" />
             <Text color={"gray"} fontSize={"sm"}>
               A payment reqest will be sent to this UPI ID
             </Text>
-            <Button my={"19px"} colorScheme={"pink"} rounded={"none"} w="100%">
+            <Button
+              my={"19px"}
+              color={"brand.white"}
+              _hover={{ bg: "brand.200" }}
+              bg={"brand.100"}
+              rounded={"none"}
+              w="100%"
+            >
               Pay
             </Button>
           </Box>
