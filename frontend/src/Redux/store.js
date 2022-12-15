@@ -7,11 +7,13 @@ import {
 import thunk from "redux-thunk";
 import { reducer as cartReducer } from "./CartReducer/cartReducer";
 import { reducer as addressReducer } from "./AddressReducer/addressReducer";
+import { reducer as authReducer } from "./AuthReducer/AuthReducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
   cartReducer,
   addressReducer,
+  authReducer,
 });
 
 export const store = legacy_createStore(

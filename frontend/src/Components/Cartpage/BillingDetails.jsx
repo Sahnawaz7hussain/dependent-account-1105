@@ -19,8 +19,6 @@ const BillingDetails = ({ baseW = 100, mdW = 34, xlW = 29 }) => {
       boxSizing="borderBox"
       p={[5, 10, 15]}
       border={"1px solid lightgray"}
-      // boxShadow={"0 0 5px 1px grey"}
-
       m="auto"
     >
       <Heading fontWeight={600} my="7px" ml="1%" as="h2" size="md">

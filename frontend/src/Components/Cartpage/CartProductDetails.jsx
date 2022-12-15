@@ -17,17 +17,17 @@ const CartProductDetails = () => {
   console.log("cartReducer ", cartData);
   return (
     <Box
-      position={"relative"}
+      boxSizing={"border-box"}
       w={{ base: "100%", md: "63%", xl: "68%" }}
-      boxShadow={"0 0 5px 1px grey"}
-      border={"0px solid red"}
-      pb="65px"
+      border={"1px solid"}
+      borderColor="brand.lightgray"
       m="auto"
+      pt={"14px"}
     >
-      <Heading my="5px" ml="2%" as="h2" size="sm">
-        Your Carts
+      <Heading ml="2%" as="h2" fontWeight={600} size="md" mb="7px">
+        Cart Items
       </Heading>
-
+      <hr />
       <Box
         display={{ sm: "block", md: "flex", xl: "flex" }}
         justifyContent={"space-between"}
@@ -83,16 +83,17 @@ const CartProductDetails = () => {
           </Button>
         </Box>
       </Box>
-
-      <Button
-        rounded={"none"}
-        position={"absolute"}
-        bottom={3}
-        right={3}
-        colorScheme={"orange"}
-      >
-        PLACE ORDER
-      </Button>
+      <Flex boxSizing="border-box" p={2} flexDir={"row-reverse"}>
+        <Button
+          rounded={"none"}
+          left={0}
+          bg={"brand.100"}
+          color={"brand.white"}
+          _hover={{ bg: "brand.200" }}
+        >
+          CHECKOUT
+        </Button>
+      </Flex>
     </Box>
   );
 };

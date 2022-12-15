@@ -6,6 +6,7 @@ import BuyerAddress from "../Components/Checkoutpage/BuyerAddress";
 import PaymentMethod from "../Components/Checkoutpage/PaymentMethod";
 
 const Checkoutpage = () => {
+  document.title = "Finest | Checkout";
   const navigate = useNavigate();
   const [isAddressPresent] = useState(true);
   if (!isAddressPresent) {
