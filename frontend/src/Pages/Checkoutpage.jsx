@@ -1,4 +1,4 @@
-import { Box, Heading, SimpleGrid, Stack } from "@chakra-ui/react";
+import { Box, Heading, Stack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { BillingDetails } from "../Components/Cartpage/BillingDetails";
@@ -14,11 +14,11 @@ const Checkoutpage = () => {
   return (
     <>
       <Box w={{ base: "99%", md: "90%", xl: "65%" }} p="20px" m="auto">
-        <Heading mb="10px" as="h1" fontSize={"25px"}>
+        <Heading mb="10px" as="h1" fontWeight={500} fontSize={"20px"}>
           Checkout
         </Heading>
         <hr />
-        <Stack direction={{ base: "column", md: "row", xl: "row" }}>
+        <Stack mt={"15px"} direction={{ base: "column", md: "row", xl: "row" }}>
           <BuyerAddress />
           <BillingDetails baseW={50} mdW={50} xlW={50} />
         </Stack>
@@ -29,7 +29,7 @@ const Checkoutpage = () => {
         p={{ base: "5px", md: "20px", xl: "20px" }}
         m="auto"
       >
-        <Heading mb="10px" as="h1" fontSize={"25px"}>
+        <Heading mb="10px" as="h1" fontWeight={500} fontSize={"20px"}>
           Payment Options
         </Heading>
         <PaymentMethod />

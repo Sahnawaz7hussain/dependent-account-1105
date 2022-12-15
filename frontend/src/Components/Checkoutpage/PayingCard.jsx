@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  border,
   Box,
   Button,
   Flex,
@@ -11,7 +10,6 @@ import {
   PinInputField,
   Spacer,
   Text,
-  VStack,
 } from "@chakra-ui/react";
 import { BsArrowRightShort } from "react-icons/bs";
 import randomcards from "../../assests/randomcards.png";
@@ -33,7 +31,6 @@ const PayingCard = () => {
         padding="15px"
         h="230px"
         m="auto"
-        // boxShadow={"0 0 5px 1px grey"}
         rounded={5}
       >
         <Box display={"flex"} flexDir={"row-reverse"} h="40px">
@@ -116,8 +113,14 @@ const PayingCard = () => {
             size={"sm"}
             rounded={"full"}
             variant={"outline"}
-            colorScheme={"pink"}
+            bg={"brand.100"}
+            color={"brand.white"}
             fontSize={"14px"}
+            _hover={{
+              bg: "brand.white",
+              border: "1px solid tomato",
+              color: "brand.100",
+            }}
             rightIcon={<BsArrowRightShort fontSize={"20px"} />}
           >
             Pay

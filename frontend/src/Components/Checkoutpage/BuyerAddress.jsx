@@ -4,7 +4,6 @@ import {
   Flex,
   Heading,
   Text,
-  useColorMode,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -19,14 +18,10 @@ import {
   Stack,
   VStack,
   Spacer,
-  Divider,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { EditIcon } from "@chakra-ui/icons";
 
 const BuyerAddress = () => {
-  const { colorMode } = useColorMode();
-
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   let getAddress = JSON.parse(localStorage.getItem("baddress"));
@@ -39,85 +34,84 @@ const BuyerAddress = () => {
       [name]: value,
     });
   };
-  const { fullname, street, state, city, mobile, landmark, zip } = getAddress;
+  const { fullname, street, state, city, mobile, landmark, zipcode } =
+    getAddress;
   const updateBuyerData = () => {
     console.log("mobile::::::::::", address);
   };
   // console.log("get address:", address);
   return (
     <Box
-      border={"0px solid blue"}
-      boxShadow={"0 0 5px 1px grey;"}
+      // boxShadow={"0 0 5px 1px grey;"}
+      border={"1px solid lightgray"}
       minW={{ base: "95%", md: "350px", xl: "390px" }}
       p={"10px"}
       h="fit-content"
     >
-      <Heading size={"md"} my={"8px"}>
-        Your Address...
+      <Heading fontWeight={500} size={"md"} as="h2" my={"9px"}>
+        Deliver To
       </Heading>
-      <Divider />
+      <hr />
       <Box position={"relative"}>
-        <Heading fontSize={24}>Name: {fullname}</Heading>
-        <Text fontWeight={700} fontSize={18}>
+        <Text mt={2} fontSize={18} fontWeight={400}>
+          Name: {fullname}
+        </Text>
+
+        <Text mt={0.5} fontWeight={400} fontSize={16}>
           Street:{" "}
-          <Box fontSize={18} fontWeight={500} as="span">
+          <Box fontSize={16} fontWeight={400} as="span">
             {street}
           </Box>
         </Text>
 
-        <Flex>
-          <Text fontWeight={700} fontSize={18} mr={15}>
+        <Flex mt={0.5}>
+          <Text fontWeight={400} fontSize={16} mr={15}>
             Mobile:{" "}
-            <Box fontSize={18} fontWeight={500} as="span">
+            <Box fontSize={16} fontWeight={400} as="span">
               {mobile}
             </Box>
           </Text>
           <Box borderLeft="1px solid black"></Box>
-          <Text fontWeight={700} fontSize={18} ml={15}>
+          <Text fontWeight={400} fontSize={16} ml={15}>
             Zip:{" "}
-            <Box fontSize={18} fontWeight={500} as="span">
-              {zip}
+            <Box fontSize={16} fontWeight={400} as="span">
+              {zipcode}
             </Box>
           </Text>
         </Flex>
 
-        <Flex>
-          <Text fontWeight={700} mr={15} fontSize={18}>
+        <Flex mt={0.5}>
+          <Text fontWeight={400} mr={15} fontSize={16}>
             City:{" "}
-            <Box fontSize={18} fontWeight={500} as="span">
+            <Box fontSize={16} fontWeight={400} as="span">
               {city}
             </Box>
           </Text>
           <Box borderLeft="1px solid black"></Box>
-          <Text fontWeight={700} fontSize={18} ml={15}>
+          <Text fontWeight={400} fontSize={16} ml={15}>
             State:{" "}
-            <Box fontSize={18} fontWeight={500} as="span">
+            <Box fontSize={16} fontWeight={400} as="span">
               {state}
             </Box>
           </Text>
         </Flex>
-        <Text fontWeight={700} fontSize={18}>
+
+        <Text mt={0.5} fontWeight={400} fontSize={16}>
           Landmark:{" "}
-          <Box fontSize={18} fontWeight={500} as="span">
+          <Box fontSize={16} fontWeight={400} as="span">
             {landmark}
           </Box>
         </Text>
+
         <Box>
-          {/* <Button
-            top={[2, 2, 3]}
-            right={[0, 3, 5]}
-            position={"absolute"}
-            _active={{ bg: "green" }}
-            _hover={{ bg: "blue.600" }}
-            onClick={onOpen}
-            px={{ base: -10, md: 0, xl: 0 }}
-            py={{ base: -10, md: 0, xl: 0 }}
-          >
-            <EditIcon />
-          </Button> */}
           <Flex flexDir={"row-reverse"}>
-            <Button onClick={onOpen} colorScheme={"pink"}>
-              EDIT
+            <Button
+              onClick={onOpen}
+              color={"#fff"}
+              _hover={{ bg: "brand.200" }}
+              bg={"brand.100"}
+            >
+              Change
             </Button>
           </Flex>
 
@@ -229,7 +223,13 @@ const BuyerAddress = () => {
                 </FormControl>
               </ModalBody>
               <ModalFooter>
-                <Button onClick={updateBuyerData} colorScheme="blue" mr={3}>
+                <Button
+                  onClick={updateBuyerData}
+                  color="brand.white"
+                  bg="brand.100"
+                  _hover={{ bg: "brand.200" }}
+                  mr={3}
+                >
                   Update
                 </Button>
               </ModalFooter>
