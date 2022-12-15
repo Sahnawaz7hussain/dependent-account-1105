@@ -3,11 +3,13 @@ import { Route, Routes } from "react-router-dom";
 import AddressForm from "../Components/Checkoutpage/AddressForm";
 import Cartpage from "../Pages/Cartpage";
 import Checkoutpage from "../Pages/Checkoutpage";
+import Homepage from "../Pages/Homepage";
 
 const MainRoutes = () => {
   return (
     <div>
       <Routes>
+        <Route path="/" element={<Homepage />} />
         <Route path="/cart" element={<Cartpage />} />
         <Route path="/checkout" element={<Checkoutpage />} />
         <Route path="/address" element={<AddressForm />} />
