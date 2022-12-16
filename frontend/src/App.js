@@ -9,7 +9,7 @@ import {ProductsPage} from './Pages/Productspage';
 import {SiderBar} from './Components/Productspage/SiderBar';
 
 import Homepage from "./Pages/Homepage";
-
+// import  ProductDetails from "./Components/Productspage/ProductDetails";
 import MainRoutes from "./Routes/MainRoutes";
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
 
       <WithSubnavigation />
       {/* <ProductsPage /> */}
+      {/* <ProductDetails /> */}
       {/* <ProductComponent /> */}
       {/* <SiderBar /> */}
     {/* <Card /> */}

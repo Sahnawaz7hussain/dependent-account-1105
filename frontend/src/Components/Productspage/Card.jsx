@@ -1,4 +1,4 @@
-import React from 'react'
+/* import React from 'react'
 import { Box ,Image ,Badge } from '@chakra-ui/react'
 import {StarIcon} from '@chakra-ui/icons'
 import './Card.css';
@@ -76,4 +76,4 @@ function SideBar() {
 )
 }
 
-export default SideBar
+export default SideBar */

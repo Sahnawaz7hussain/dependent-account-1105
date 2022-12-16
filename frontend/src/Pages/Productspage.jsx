@@ -1,3 +1,5 @@
+//  this is  product page
+
 import React, { useEffect, useState } from "react";
 import {
   Box,
@@ -9,130 +11,29 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { ProductComponent } from "../Components/Productspage/ProductComponent";
-// import { useDispatch, useSelector } from "react-redux";
-// import { fetchData } from "../../Redux/product/action";
+import { useDispatch, useSelector } from "react-redux";
 // import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router";
-// import { Topnavbar } from "../Navbar/Topnavbar";
-import axios from "axios";
 import LoadingComp from "../Components/Productspage/LoadingComponent";
 import { SiderBar } from "./../Components/Productspage/SiderBar";
+import { getProductsActionFn } from "../Redux/ProductReducer/ProductAction";
+
 export const ProductsPage = () => {
-  const product = [
-    {
-      imgUrl:
-        "https://media.istockphoto.com/id/1253594253/photo/orange-and-half-of-it-is-cut-into-pieces.jpg?b=1&s=170667a&w=0&k=20&c=Wo78fmL9k3LNrBcJKfNf8fefOj6F-IkrvKZJHsGiLL0=",
-      price: 200,
-      quantity: 2,
-      title: "Oranges",
-      brand: "Top",
-    },
-    {
-      imgUrl:
-        "https://media.istockphoto.com/id/1253594253/photo/orange-and-half-of-it-is-cut-into-pieces.jpg?b=1&s=170667a&w=0&k=20&c=Wo78fmL9k3LNrBcJKfNf8fefOj6F-IkrvKZJHsGiLL0=",
-      price: 200,
-      quantity: 2,
-      title: "Oranges",
-      brand: "Top",
-    },
-    {
-      imgUrl:
-        "https://media.istockphoto.com/id/1253594253/photo/orange-and-half-of-it-is-cut-into-pieces.jpg?b=1&s=170667a&w=0&k=20&c=Wo78fmL9k3LNrBcJKfNf8fefOj6F-IkrvKZJHsGiLL0=",
-      price: 200,
-      quantity: 2,
-      title: "Oranges",
-      brand: "Top",
-    },
-    {
-      imgUrl:
-        "https://media.istockphoto.com/id/1253594253/photo/orange-and-half-of-it-is-cut-into-pieces.jpg?b=1&s=170667a&w=0&k=20&c=Wo78fmL9k3LNrBcJKfNf8fefOj6F-IkrvKZJHsGiLL0=",
-      price: 200,
-      quantity: 2,
-      title: "Oranges",
-      brand: "Top",
-    },
-    {
-      imgUrl:
-        "https://media.istockphoto.com/id/1253594253/photo/orange-and-half-of-it-is-cut-into-pieces.jpg?b=1&s=170667a&w=0&k=20&c=Wo78fmL9k3LNrBcJKfNf8fefOj6F-IkrvKZJHsGiLL0=",
-      price: 200,
-      quantity: 2,
-      title: "Oranges",
-      brand: "Top",
-    },
-    {
-      imgUrl:
-        "https://media.istockphoto.com/id/1253594253/photo/orange-and-half-of-it-is-cut-into-pieces.jpg?b=1&s=170667a&w=0&k=20&c=Wo78fmL9k3LNrBcJKfNf8fefOj6F-IkrvKZJHsGiLL0=",
-      price: 200,
-      quantity: 2,
-      title: "Oranges",
-      brand: "Top",
-    },
-    {
-      imgUrl:
-        "https://media.istockphoto.com/id/1253594253/photo/orange-and-half-of-it-is-cut-into-pieces.jpg?b=1&s=170667a&w=0&k=20&c=Wo78fmL9k3LNrBcJKfNf8fefOj6F-IkrvKZJHsGiLL0=",
-      price: 200,
-      quantity: 2,
-      title: "Oranges",
-      brand: "Top",
-    },
-    {
-      imgUrl:
-        "https://media.istockphoto.com/id/1253594253/photo/orange-and-half-of-it-is-cut-into-pieces.jpg?b=1&s=170667a&w=0&k=20&c=Wo78fmL9k3LNrBcJKfNf8fefOj6F-IkrvKZJHsGiLL0=",
-      price: 200,
-      quantity: 2,
-      title: "Oranges",
-      brand: "Top",
-    },
-  ];
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.productReducer);
+  console.log("data", data);
+  const getProducts = () => {
+    dispatch(getProductsActionFn());
+  };
 
-  //   const dispatch = useDispatch();
-  //   const product = useSelector((state) => state.products.product);
-  //   const [searchParams, setSearchParams] = useSearchParams();
-  //   const [orderValue, setOrderValue] = useState(searchParams.get("order") );
-  //   const [brandValue, setbrandValue] = useState(searchParams.getAll("brand"));
-  //   const [sizeValue, setsizeValue] = useState(searchParams.getAll("quantity"));
-  //   const [priceValue, setPriceValue] = useState();
-  //   const [loading,setLoading]=useState(false);
-  //   useEffect(()=>{
-  //     if(product.length>=1){
-  //       setLoading(true)
-  //     }
-  //   })
-
-  //   const priceHandler = (value) => {
-  //     setOrderValue(value);
-  //   };
-
-  //   const brandHandler = (value) => {
-  //     setbrandValue(value);
-  //   };
-
-  //   const sizeHandler = (value) => {
-  //     setsizeValue(value);
-  //   };
-
-  //   useEffect(() => {
-  //     setLoading(false)
-  //     if (orderValue!=null  || brandValue.length !== 0 || sizeValue !== 0) {
-  //       setSearchParams(
-  //             { brand: brandValue, quantity: sizeValue, order: orderValue },
-  //             { replace: true }
-  //           )
-  //       const params = {
-  //         brand: searchParams.getAll("brand"),
-  //         order: searchParams.get("order"),
-  //         quantity: searchParams.getAll("quantity"),
-  //       };
-  // // console.log("SERARCH",params.order)
-  //       dispatch(fetchData(params));
-  //     }
-  //     setLoading(true)
-  //   }, [brandValue, searchParams, orderValue, sizeValue, setSearchParams]);
+  useEffect(() => {
+    getProducts();
+  }, []);
 
   return (
     <Box width={"100%"}>
       {/* <Topnavbar /> */}
-      {product.length == 0 ? (
+      {data.product?.length == 0 ? (
         <Box width="98%">
           <LoadingComp />
         </Box>
@@ -244,13 +145,13 @@ export const ProductsPage = () => {
                     fontSize={"20px"}
                     fontWeight={400}
                   >
-                    Fruits & Vegetables ({product.length})
+                    Fruits & Vegetables ({data.product.length})
                   </Text>
                 </Stack>
                 <Flex flexWrap={"wrap"} borderTop={"1px solid #e8e8e8"}>
-                  {product &&
-                    product.map((e) => {
-                      return <ProductComponent key={e._id} props={e} />;
+                  {data.product &&
+                    data.product.map((e) => {
+                      return <ProductComponent key={e._id} props={{...e}} />;
                     })}
                 </Flex>
               </Box>
@@ -259,5 +160,50 @@ export const ProductsPage = () => {
         </Box>
       )}
     </Box>
-  )
-}
+  );
+};
+
+//! this is previously use code
+//   const dispatch = useDispatch();
+//   const product = useSelector((state) => state.products.product);
+//   const [searchParams, setSearchParams] = useSearchParams();
+//   const [orderValue, setOrderValue] = useState(searchParams.get("order") );
+//   const [brandValue, setbrandValue] = useState(searchParams.getAll("brand"));
+//   const [sizeValue, setsizeValue] = useState(searchParams.getAll("quantity"));
+//   const [priceValue, setPriceValue] = useState();
+//   const [loading,setLoading]=useState(false);
+//   useEffect(()=>{
+//     if(product.length>=1){
+//       setLoading(true)
+//     }
+//   })
+
+//   const priceHandler = (value) => {
+//     setOrderValue(value);
+//   };
+
+//   const brandHandler = (value) => {
+//     setbrandValue(value);
+//   };
+
+//   const sizeHandler = (value) => {
+//     setsizeValue(value);
+//   };
+
+//   useEffect(() => {
+//     setLoading(false)
+//     if (orderValue!=null  || brandValue.length !== 0 || sizeValue !== 0) {
+//       setSearchParams(
+//             { brand: brandValue, quantity: sizeValue, order: orderValue },
+//             { replace: true }
+//           )
+//       const params = {
+//         brand: searchParams.getAll("brand"),
+//         order: searchParams.get("order"),
+//         quantity: searchParams.getAll("quantity"),
+//       };
+// // console.log("SERARCH",params.order)
+//       dispatch(fetchData(params));
+//     }
+//     setLoading(true)
+//   }, [brandValue, searchParams, orderValue, sizeValue, setSearchParams]);

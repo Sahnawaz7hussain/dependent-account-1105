@@ -1,29 +1,29 @@
+
+//  this is card page
+
+
+
 import { Box, Text, Stack, Image, Flex, Center, Button } from "@chakra-ui/react";
 import { MdLocalShipping } from "react-icons/md";
-// import { useNavigate } from "react-router";
 import "./ProductCom.css";
 import { Link } from "react-router-dom";
 // import { useDispatch, useSelector } from "react-redux";
 // import { addtoCart, addtocartaction } from "../../Redux/product/action";
-export const ProductComponent = () => {
-  const data={
-    imgUrl:"https://media.istockphoto.com/id/1253594253/photo/orange-and-half-of-it-is-cut-into-pieces.jpg?b=1&s=170667a&w=0&k=20&c=Wo78fmL9k3LNrBcJKfNf8fefOj6F-IkrvKZJHsGiLL0=",
-    price:200,
-    quantity:2,
-    title:"Oranges",
-    brand:"Top"
+export const ProductComponent = ({props}) => {
 
-  }
-  // console.log("data",data)
-  // const dispatch = useDispatch()
-  // const navigate = useNavigate()
+  const {brand,image,_id,category,cost,title,stock}=props
 
+  // console.log(title,"props")
+  // console.log(category,"props")
+  // console.log(props.image,"props")
+  
+  
   const handleCart=()=>{
     // console.log("data",data)
     // dispatch(addtocartaction(data))
     // dispatch(addtoCart(data));
   }
-  // console.log("data.id",data._id)
+
   return (
     <Box
       width={"33%"}
@@ -40,7 +40,7 @@ export const ProductComponent = () => {
         zIndex={1}
         margin="1rem"
       >
-        <Link to={`/products/${data._id}`}>
+        <Link to={`/singleproduct/${_id}`}>
           <Flex
             flexDirection="column"
             alignItems="center"
@@ -51,32 +51,32 @@ export const ProductComponent = () => {
               rounded={"lg"}
               objectFit={"cover"}
               // border="1px solid red"
-              src={data.imgUrl}
+              src={image}
             />
           </Flex>
         </Link>
         <Stack textAlign={"left"}>
           <Text color={"gray.500"} fontSize={"sm"}>
-            {data.brand}
+            {brand}
           </Text>
           <Text color={"black"} fontSize={"12px"}>
-            {data.title}
+            {title}
           </Text>
           <Text color={"black"} fontSize={"13px"}>
-            {data.quantity}-Rs{data.price}{" "}
+            Rs{cost}{" "}
           </Text>
           <Stack direction={"row"} textAlign={"center"}>
             <Text color={"black"} fontSize={"12px"}>
-              Rs {Math.floor(data.price - (10 * data.price) / 100)}
+              Rs {Math.floor(cost - (10 * cost) / 100)}
             </Text>
             <Text fontSize={"12px"} color={"black"}>
               MRP{" "}
               <span className="linethrough" textDecoration={"line-through"}>
-                Rs{data.price}
+                Rs{cost}
               </span>
             </Text>
           </Stack>
-          <Button variant={"outline"} p="0" onClick={() => handleCart(data)}>
+          <Button variant={"outline"} p="0" onClick={() => handleCart()}>
             Add to cart
           </Button>
           <Stack direction="row" alignItems="center" justifyContent={"center"}>
@@ -91,3 +91,5 @@ export const ProductComponent = () => {
     </Box>
   );
 };
+
+
