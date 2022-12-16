@@ -13,12 +13,15 @@ const reducer = (oldState = initialCartData, action) => {
       return {
         ...oldState,
         isCartLoading: true,
+        isCartError: false,
+        cartItems: [],
       };
     case types.GET_CART_ITEMS_SUCCESS:
       return {
         ...oldState,
         isCartLoading: false,
         cartItems: payload,
+        isCartError: false,
       };
     case types.GET_CART_ITEMS_FAILURE:
       return {

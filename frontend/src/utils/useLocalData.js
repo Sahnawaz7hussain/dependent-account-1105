@@ -9,7 +9,7 @@ const getLocalStorageData = (key) => {
 };
 
 const removeFromLocalStorage = (key) => {
-  let res = localStorage.removeItem(key);
+  localStorage.removeItem(key);
 };
 
 export { saveToLocalStorage, getLocalStorageData, removeFromLocalStorage };

@@ -41,4 +41,4 @@ const updateAddressActionFn = (id, data) => (dispatch) => {
     });
 };
 
-export { getAddressActionFn, updateAddressActionFn };
+export { getAddressActionFn, updateAddressActionFn, postAddressActionFn };
