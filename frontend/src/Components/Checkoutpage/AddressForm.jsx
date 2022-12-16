@@ -159,7 +159,9 @@ const AddressForm = () => {
           my={5}
           w="100%"
           onClick={hanldeAddingAddress}
-          colorScheme={"pink"}
+          color={"brand.white"}
+          bg={"brand.100"}
+          _hover={{ bg: "brand.200" }}
         >
           ADD
         </Button>
