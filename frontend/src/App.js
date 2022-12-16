@@ -20,3 +20,5 @@ function App() {
       </div>
   )
   }
+
+  export {App}
