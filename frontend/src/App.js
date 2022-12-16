@@ -6,13 +6,14 @@ import { ProductDetails } from "./Components/Productspage/ProductDetails";
 import {ProductsPage} from './Pages/Productspage';
 import {SiderBar} from './Components/Productspage/SiderBar';
 import Homepage from "./Pages/Homepage";
-
+// import  ProductDetails from "./Components/Productspage/ProductDetails";
 import MainRoutes from "./Routes/MainRoutes";
 
 function App() {
   return (
     <div className="App">
       {/* <ProductsPage /> */}
+      {/* <ProductDetails /> */}
       {/* <ProductComponent /> */}
       {/* <SiderBar /> */}
     {/* <Card /> */}
