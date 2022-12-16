@@ -259,5 +259,5 @@ export const ProductsPage = () => {
         </Box>
       )}
     </Box>
-  );
-};
+  )
+}

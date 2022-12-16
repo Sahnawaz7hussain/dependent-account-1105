@@ -5,18 +5,18 @@ import { ProductDetails } from "./Components/Productspage/ProductDetails";
 // import Card from "./Components/Productspage/Card"
 import {ProductsPage} from './Pages/Productspage';
 import {SiderBar} from './Components/Productspage/SiderBar';
+import Homepage from "./Pages/Homepage";
+
+import MainRoutes from "./Routes/MainRoutes";
 
 function App() {
   return (
     <div className="App">
       {/* <ProductsPage /> */}
       {/* <ProductComponent /> */}
-      <ProductDetails />
-      {/* <FilterComponent /> */}
       {/* <SiderBar /> */}
     {/* <Card /> */}
-    </div>
-  );
-}
-
-export default App;
+      <MainRoutes />
+      </div>
+  )
+  }
