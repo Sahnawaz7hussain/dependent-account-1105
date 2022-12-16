@@ -1,6 +1,6 @@
 import { Carousel } from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
+import {Link} from 'react-router-dom'
 import Four from '../../assets/Cp_m_GM_EPBanner_460-051222.webp';
 import Three from '../../assets/HP_EMF_M_WeekdayBangalore-1600x460-221212.webp';
 import First from '../../assets/hp_m_Dairy_460px-011222.webp';
@@ -29,14 +29,14 @@ const slider = [
 function Slider() {
     return (
         <div className='maindivhai'>
-            <Carousel autoPlay infiniteLoop showArrows showIndicators>
+        <Link to="/products">    <Carousel autoPlay infiniteLoop showArrows showIndicators>
 
                 {slider.map((el) => {
                     return <img src={el.image} alt="additional-image" height='100%' width='90%' />
                 })}
 
             </Carousel>
-
+                </Link>
 
         </div>
     )

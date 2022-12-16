@@ -1,13 +1,13 @@
 import React from "react";
 
 import { Grid, Image } from "semantic-ui-react";
-
+import {Link} from 'react-router-dom'
 
 export const BeautyandHygiene = () => (
   <div>
     <p style={{ textAlign: "center", fontSize: "20px" }}>Beauty and Hygiene</p>
     <div class="ui clearing divider"></div>
-    <Grid verticalAlign="" columns={2} centered>
+    <Link to="/products"><Grid verticalAlign="" columns={2} centered>
       <Grid.Row>
         <Grid.Column>
         <div className="HoverEffect">
@@ -42,5 +42,6 @@ export const BeautyandHygiene = () => (
 
       <Grid verticalAlign="middle" columns={2} centered></Grid>
     </Grid>
+    </Link>
   </div>
 );

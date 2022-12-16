@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Grid, Image, Segment } from "semantic-ui-react";
-
+import {Link} from 'react-router-dom'
 
 export const TopOffers = () => (
     <div>
@@ -9,7 +9,7 @@ export const TopOffers = () => (
       Top Offers
       </p>
       <div class="ui clearing divider"></div>
-      <Grid doubling columns={4}>
+      <Link to="/products">    <Grid doubling columns={4}>
         <Grid.Column>
         <div className="HoverEffect">
             <Segment>
@@ -39,6 +39,7 @@ export const TopOffers = () => (
           </div>
         </Grid.Column>
       </Grid>
+      </Link>
     </div>
   );
   

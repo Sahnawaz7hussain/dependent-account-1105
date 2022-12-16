@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
+
+import { json, Link } from 'react-router-dom'
 
 import {
   Box,
@@ -9,7 +11,7 @@ import {
   Stack,
   Collapse,
   Icon,
-  Link,
+  // Link,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -21,17 +23,57 @@ import {
   Spacer,
   InputGroup,
   InputRightElement,
+  useColorMode, FormLabel,
+  FormControl, Switch
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
   CloseIcon,
   ChevronDownIcon,
   ChevronRightIcon,
+  MoonIcon,
+  SunIcon,
+  Search2Icon
+
 } from "@chakra-ui/icons";
 
-export default function WithSubnavigation() {
-  const { isOpen, onToggle } = useDisclosure();
 
+export default function Navbar() {
+  const { isOpen, onToggle } = useDisclosure();
+  const { colorMode, toggleColorMode } = useColorMode();
+  const [search, setSearch] = useState();
+
+
+  //--------------------------------------------
+  const debounce = (func) => {
+    let timer;
+    return function (...args) {
+      const context = this;
+      if (timer) clearTimeout(timer)
+      timer = setTimeout(() => {
+        timer = null
+        func.apply(context, args);
+      }, 500);
+    }
+  }
+ 
+
+  const handleChange = (event) => {
+    const { value } = event.target;
+    fetch(`https://hilarious-kerchief-crab.cyclic.app/product/search?q=${value}`)
+      .then(data => {
+        return data.json();
+        })
+      .then(resp => {
+        setSearch(json.resp.title)
+        console.log(...resp);
+      });
+    // console.log(resp);
+  }
+ 
+ const optimisedVersion = useCallback(debounce(handleChange), [])  
+
+//----------------------------------------------- 
   return (
     <>
       <Box>
@@ -76,8 +118,6 @@ export default function WithSubnavigation() {
           </Flex>
 
           <Stack
-            // flex={{ base: 1, md: 0 }}
-            // justify={'flex-start'}
             direction={"row"}
             spacing={6}
           >
@@ -89,38 +129,51 @@ export default function WithSubnavigation() {
           </Stack>
 
           <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-            {/* <Image boxSize='80px'
-             src="https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-12-15/Screenshot_20221215_145111_432852.png" alt="Icon" /> */}
-            {/* https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2022-12-15/Screenshot_20221215_145111_432852.png */}
             <Flex display={{ base: "none", md: "flex" }} ml={10}>
               <DesktopNav />
             </Flex>
-
-            {/* <Stack> */}
-            {/* <InputGroup size='md'>
-          <Input variant='outline' width='32rem' background={"white"}
-            focusBorderColor='pink.400'
-            placeholder='Here is a sample placeholder'
-          />
-      <InputRightElement width='4.5rem'>
-        <Button h='1.75rem' size='sm'>
-           Search
-        </Button>
-      </InputRightElement>
-    </InputGroup>
-        */}
-
-            {/* </Stack> */}
           </Flex>
           <Stack flex={{ base: 1, md: 0.7 }}>
             <InputGroup size="md" background={"white"}>
-              <Input pr="4.5rem" placeholder="Enter password" />
+              <Input pr="4.5rem" placeholder="Search Products"
+                type={'text'} name={'search'} className={'search'}
+                onChange={optimisedVersion}  />
+              {search?.length > 0 &&
+                <div className={'autocomplete'}>
+                  {search.map((el, i) =>
+                    <div key={i} className={'autocomplateItem'}>
+                      <spen>{el.title}</spen>
+                    </div>)}
+                </div>}
               <InputRightElement width="4.5rem">
-                <Button h="1.75rem" size="sm">
-                  Search
+                <Button  h="2.4rem" size="lg">
+                  <Search2Icon />
                 </Button>
               </InputRightElement>
             </InputGroup>
+            {/* <Dropdown>
+                    {data
+                      .filter((item) => {
+                        const searchTerm = value.toLowerCase();
+                        const fullName = item.full_name.toLowerCase();
+          
+                        return (
+                          searchTerm &&
+                          fullName.startsWith(searchTerm) &&
+                          fullName !== searchTerm
+                        );
+                      })
+                      .slice(0, 10)
+                      .map((item) => (
+                        <div
+                          onClick={() => onSearch(item.full_name)}
+                          className="dropdown-row"
+                          key={item.full_name}
+                        >
+                          {item.full_name}
+                        </div>
+                      ))}
+            </Dropdown> */}
           </Stack>
 
           <Stack
@@ -129,28 +182,36 @@ export default function WithSubnavigation() {
             direction={"row"}
             spacing={6}
           >
-            <Button
-              as={"a"}
-              fontSize={"sm"}
-              fontWeight={400}
-              variant={"link"}
-              href={"#"}
-            >
-              Sign In
+            <Button onClick={toggleColorMode} spacing={4}>
+              {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </Button>
-            <Button
-              display={{ base: "none", md: "inline-flex" }}
-              fontSize={"sm"}
-              fontWeight={600}
-              color={"white"}
-              bg={"blue.400"}
-              href={"#"}
-              _hover={{
-                bg: "pink.300",
-              }}
-            >
-              Sign Up
-            </Button>
+            <Link to="/login">
+              <Button
+                fontSize={"sm"}
+                fontWeight={600}
+                color={"white"}
+                bg={"blue.400"}
+                _hover={{
+                  bg: "brand.100",
+                }}
+              >
+                Log In
+              </Button></Link>
+            <Link to="/signup">
+              <Button
+                display={{ base: "none", md: "inline-flex" }}
+                fontSize={"sm"}
+                fontWeight={600}
+                color={"white"}
+                bg={"brand.100"}
+                href={"#"}
+                _hover={{
+                  bg: "blue.400",
+                }}
+              >
+                Sign Up
+              </Button>
+            </Link>
           </Stack>
         </Flex>
 
@@ -168,14 +229,14 @@ const DesktopNav = () => {
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
   return (
-    <Stack direction={"row"} spacing={4}>
+    <Stack direction={"row"} spacing={9}>
       {NAV_ITEMS.map((navItemss) => (
-        <Box key={navItemss.label}>
+        <Box fontWeight={500} key={navItemss.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
               <Link
                 p={2}
-                href={navItemss.href ?? "#"}
+                href={navItemss.href ?? "products"}
                 fontSize={"sm"}
                 fontWeight={500}
                 color={linkColor}
@@ -183,6 +244,7 @@ const DesktopNav = () => {
                   textDecoration: "none",
                   color: linkHoverColor,
                 }}
+                to='/products'
               >
                 {navItemss.label}
               </Link>
@@ -318,41 +380,48 @@ const MobileNavItemss = ({ label, children, href }) => {
 
 const NAV_ITEMS = [
   {
-    label: "Inspiration",
+    label: "Brands",
     children: [
       {
-        label: "Explore Design Work",
-        subLabel: "Trending Design to inspire you",
-        href: "#",
+        label: "Top Brands",
+        subLabel: "Trending Brands to inspire you",
+        href: "/products",
       },
       {
         label: "New & Noteworthy",
         subLabel: "Up-and-coming Designers",
-        href: "#",
+        href: "/products",
       },
     ],
   },
   {
-    label: "Find Work",
+    label: "Shop By Categarys",
     children: [
       {
-        label: "Job Board",
-        subLabel: "Find your dream design job",
-        href: "#",
+        label: "Grocery",
+        subLabel: "Find your grocery",
+        href: "/products",
       },
       {
-        label: "Freelance Projects",
-        subLabel: "An exclusive list for contract work",
-        href: "#",
+        label: "Categary",
+        subLabel: "An exclusive list ",
+        href: "/products",
       },
     ],
   },
   {
-    label: "Learn Design",
-    href: "#",
+    label: "Grocery Offers",
+    href: "/products",
   },
   {
-    label: "Hire Designers",
-    href: "#",
+    label: "Top Products",
+    href: "/products",
   },
 ];
+
+
+
+
+
+
+
