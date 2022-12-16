@@ -12,7 +12,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { BsArrowRightShort } from "react-icons/bs";
-import randomcards from "../../assests/randomcards.png";
+import randomcards from "../../assets/randomcards.png";
 import { useState } from "react";
 const PayingCard = () => {
   const [cardNumber, setCardNumber] = useState("");
