@@ -1,0 +1,18 @@
+.transition{
+    transition: transform 1s,  ease-in;
+    cursor: zoom-out;
+    /* border:1px solid red; */
+    border-width: 1px;
+}
+.transition:hover{
+    transform: scale(1.1);
+}
+.linethrough{
+    text-decoration: line-through;
+}
+.borderwidth{
+    border-width: 1px;
+}
+.margin {
+    margin: 2px;
+}
