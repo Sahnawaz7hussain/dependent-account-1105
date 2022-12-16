@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -9,8 +9,8 @@ import {
   RadioGroup,
   Spacer,
   Text,
+  useToast,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import PayingCard from "./PayingCard";
 let methods = [
   {
@@ -29,6 +29,17 @@ let methods = [
 
 const PaymentMethod = () => {
   const [pmethod, setPmethod] = useState("card");
+  const toast = useToast();
+  const handlePayment = () => {
+    toast({
+      title: "Order Status.",
+      description: "Your order placed successfully.",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+      position: "top",
+    });
+  };
   return (
     <Box
       display={{ base: "block", md: "flex", xl: "flex" }}
@@ -36,50 +47,6 @@ const PaymentMethod = () => {
       rounded={"5px"}
       border={"1px solid lightgray"}
     >
-      {/* <Box w="30%" border={"1px solid blue"}>
-        <RadioGroup onChange={setPmethod} value={pmethod}>
-          <SimpleGrid columns={"1"} gap={"20px"}>
-            <Flex
-              onClick={() => setPmethod("card")}
-              h="70px"
-              bg={pmethod === "card" ? "gray.100" : ""}
-              alignItems={"center"}
-              // justifyContent={"center"}
-              border="1px"
-            >
-              <Radio defaultChecked value="card">
-                Debit Card
-              </Radio>
-            </Flex>
-            <Flex
-              onClick={() => setPmethod("upi")}
-              h="70px"
-              bg={pmethod === "cod" ? "gray.100" : ""}
-              alignItems={"center"}
-              // justifyContent={"center"}
-              border={"0px solid blue"}
-            >
-              <Radio h="50px" value="upi">
-                UPI
-              </Radio>
-            </Flex>
-            <Flex
-              onClick={() => setPmethod("cod")}
-              h="70px"
-              bg={pmethod === "cod" ? "gray.100" : ""}
-              alignItems={"center"}
-              boxSizing={"border-box"}
-              pl={"15px"}
-              // justifyContent={"center"}
-              border={"0px solid blue"}
-            >
-              <Radio h="50px" value="cod">
-                Cash on Delivery
-              </Radio>
-            </Flex>
-          </SimpleGrid>
-        </RadioGroup>
-      </Box> */}
       {/* ///////////////////////////////////////////////////  */}
 
       <Box
@@ -119,6 +86,7 @@ const PaymentMethod = () => {
               Payable amount ₹500
             </Heading>
             <Button
+              onClick={handlePayment}
               _hover={{ bg: "brand.200" }}
               mt={"50px"}
               bg={"brand.100"}
@@ -147,6 +115,7 @@ const PaymentMethod = () => {
               bg={"brand.100"}
               rounded={"none"}
               w="100%"
+              onClick={handlePayment}
             >
               Pay
             </Button>

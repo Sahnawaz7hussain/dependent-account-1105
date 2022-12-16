@@ -10,6 +10,7 @@ import {
   PinInputField,
   Spacer,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { BsArrowRightShort } from "react-icons/bs";
 import randomcards from "../../assets/randomcards.png";
@@ -17,13 +18,66 @@ import { useState } from "react";
 const PayingCard = () => {
   const [cardNumber, setCardNumber] = useState("");
   const [mmyy, setMmyy] = useState("");
-  const [holderName, setHolderName] = useState("");
   const [cvv, setCvv] = useState("");
+  const [holderName, setHolderName] = useState("");
+  const toast = useToast();
+
   const handleOnChangeCvv = (e) => {
     setCvv(e.target.value);
   };
   console.log("name: ", cvv);
   // console.log("card number: ", cardNumber);
+  const handleCardPayment = () => {
+    if (!cardNumber || !mmyy || !cvv || !holderName) {
+      return toast({
+        title: "Invalid inputs.",
+        description: "All fields are required.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+    if (cardNumber.length < 16) {
+      return toast({
+        title: "Order Status.",
+        description: "Incorrect card number.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+    if (mmyy.length < 4) {
+      return toast({
+        title: "Order Status.",
+        description: "Invalid MM/YY.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+    if (cvv.length < 3) {
+      return toast({
+        title: "Order Status.",
+        description: "Invalid CVV.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
+    } else {
+      toast({
+        title: "Order Status.",
+        description: "Your order placed successfully.",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+  };
   return (
     <Box>
       <Box
@@ -40,26 +94,16 @@ const PayingCard = () => {
         <Text mb="5px" fontSize={"14px"}>
           Card Number
         </Text>
-        <HStack>
-          <PinInput
-            value={cardNumber}
-            onChange={(value) => setCardNumber(value)}
-            size="sm"
-          >
-            <PinInputField />
-            <PinInputField />
-            <PinInputField />
-            <PinInputField />
-            <PinInputField />
-            <PinInputField />
-            <PinInputField />
-            <PinInputField />
-            <PinInputField />
-            <PinInputField />
-            <PinInputField />
-            <PinInputField />
-          </PinInput>
-        </HStack>
+
+        <Input
+          _focus={{ border: "none", rounded: "none" }}
+          border={"1px solid lightgray"}
+          rounded={"none"}
+          type="text"
+          maxLength={16}
+          value={cardNumber}
+          onChange={(e) => setCardNumber(e.target.value)}
+        />
 
         <Flex alignItems={"center"} justifyContent={"space-between"}>
           <Box>
@@ -86,13 +130,14 @@ const PayingCard = () => {
             <Text>cvv</Text>
             <Input
               value={cvv}
+              _focus={{ border: "none", rounded: "none" }}
               onChange={handleOnChangeCvv}
               maxLength={3}
               type={"text"}
               w="50%"
               h="20px"
+              pl="0px"
               rounded={"none"}
-              variant={"flushed"}
             />
           </Box>
         </Flex>
@@ -110,6 +155,7 @@ const PayingCard = () => {
           />
           <Spacer />
           <Button
+            onClick={handleCardPayment}
             size={"sm"}
             rounded={"full"}
             variant={"outline"}

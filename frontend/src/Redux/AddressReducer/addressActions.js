@@ -14,6 +14,17 @@ const getAddressActionFn = () => (dispatch) => {
       dispatch({ type: types.GET_ADDRESS_FAILURE, payload: err });
     });
 };
+const postAddressActionFn = (data) => (dispatch) => {
+  dispatch({ type: types.POST_ADDRESS_REQUEST });
+  return axios
+    .post(`${address_url}/post`, data)
+    .then((res) => {
+      return dispatch({ type: types.POST_ADDRESS_SUCCESS, payload: res.data });
+    })
+    .catch((err) => {
+      dispatch({ type: types.POST_ADDRESS_FAILURE, payload: err });
+    });
+};
 
 const updateAddressActionFn = (id, data) => (dispatch) => {
   dispatch({ type: types.UPDATE_ADDRESS_REQUEST });
@@ -30,4 +41,4 @@ const updateAddressActionFn = (id, data) => (dispatch) => {
     });
 };
 
-export { getAddressActionFn, updateAddressActionFn };
+export { getAddressActionFn, updateAddressActionFn, postAddressActionFn };

@@ -1,5 +1,14 @@
+import {
+  getLocalStorageData,
+  saveToLocalStorage,
+} from "../../utils/useLocalData";
 import * as types from "./AuthActionTypes";
+
+let userToken = getLocalStorageData("JWTTOKEN");
+const isAuth = userToken ? true : false;
+console.log("userTokan");
 const initAuthData = {
+  isAuth: isAuth,
   isAuthLoading: false,
   isAuthError: false,
   authData: {},
@@ -41,11 +50,13 @@ const reducer = (oldState = initAuthData, action) => {
         authErr: {},
       };
     case types.USER_LOGIN_SUCCESS:
+      saveToLocalStorage("JWTTOKEN", payload.token);
       return {
         ...oldState,
         isAuthLoading: false,
         isAuthError: false,
         authData: payload,
+        isAuth: true,
         authErr: {},
       };
     case types.USER_LOGIN_FAILURE:
