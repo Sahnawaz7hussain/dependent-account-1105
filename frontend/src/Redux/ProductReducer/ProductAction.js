@@ -2,10 +2,14 @@ import * as types from "./ProductActionType";
 import axios from "axios";
 let base_url = "https://hilarious-kerchief-crab.cyclic.app/product";
 
-const getProductsActionFn = (params={}) => (dispatch) => {
+const getProductsActionFn = (payload) => (dispatch) => {
   dispatch({ type: types.GET_PRODUCTS_REQUEST });
   return axios
-    .get(`${base_url}`,params)
+    .get(`${base_url}`, {
+      params: {
+        ...payload,
+      },
+    })
     .then((res) => {
       return dispatch({
         type: types.GET_PRODUCTS_SUCCESS,

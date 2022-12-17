@@ -12,8 +12,8 @@ import {
 } from "@chakra-ui/react";
 import { ProductComponent } from "../Components/Productspage/ProductComponent";
 import { useDispatch, useSelector } from "react-redux";
-// import { useSearchParams } from "react-router-dom";
-import { useNavigate } from "react-router";
+import { useSearchParams } from "react-router-dom";
+// import { useNavigate } from "react-router";
 import LoadingComp from "../Components/Productspage/LoadingComponent";
 import { SiderBar } from "./../Components/Productspage/SiderBar";
 import { getProductsActionFn } from "../Redux/ProductReducer/ProductAction";
@@ -29,6 +29,48 @@ export const ProductsPage = () => {
   useEffect(() => {
     getProducts();
   }, []);
+  //  below this we user search params for products
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [filter, setfilter] = useState(searchParams.get("filter"));
+  const [brand, setbrand] = useState(searchParams.getAll("brand"));
+  const [category, setcategory] = useState(searchParams.getAll("category"));
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    if (data.length >= 1) {
+      setLoading(true);
+    }
+  });
+
+  const filterHandler = (value) => {
+    setfilter(value);
+  };
+
+  const brandHandler = (value) => {
+    setbrand(value);
+  };
+
+  const categoryHandler = (value) => {
+    setcategory(value);
+  };
+
+  useEffect(() => {
+    setLoading(false);
+    if (filter != null || brand.length !== 0 || category !== 0) {
+      setSearchParams(
+        { brand: brand, category: category, filter: filter },
+        { replace: true }
+      );
+      const params = {
+        brand: searchParams.getAll("brand") || [],
+        filter: searchParams.get("filter") || 1,
+        category: searchParams.getAll("category") || [],
+      };
+      // console.log("SERARCH",params.order)
+      dispatch(getProductsActionFn(params));
+    }
+    setLoading(true);
+  }, [brand, searchParams, filter, category, setSearchParams]);
 
   return (
     <Box width={"100%"}>
@@ -54,7 +96,7 @@ export const ProductsPage = () => {
                   fontWeight={500}
                   borderBottom={"1px solid #e8e8e8"}
                 >
-                  Category
+                  Apply Filters
                 </Text>
                 <Text color={" #84c225"} fontSize={"12px"} fontWeight={500}>
                   Fruites & Vegetables
@@ -63,69 +105,75 @@ export const ProductsPage = () => {
                   <Box width={"100%"} mt={"1.5rem"}>
                     <Box mb="1rem" borderBottom="1px solid #e8e8e8" pb={"1rem"}>
                       <Text fontSize={"14px"} fontWeight={"500"} mb={"1rem"}>
-                        filter by Price
+                        Filter by Price
                       </Text>
-                      <CheckboxGroup colorScheme="green">
+                      <CheckboxGroup
+                        colorScheme="green"
+                        defaultValue={filter}
+                        onChange={filterHandler}
+                      >
                         <VStack
                           direction={["column", "row"]}
                           alignItems={"baseline"}
                           fontSize={"12px"}
                           fontWeight={"375"}
                         >
-                          <Checkbox value="asc">Low to high</Checkbox>
-                          <Checkbox value="desc">High to Low</Checkbox>
+                          <Checkbox value="1">Low to high</Checkbox>
+                          <Checkbox value="-1">High to Low</Checkbox>
                         </VStack>
                       </CheckboxGroup>
                       <Text fontSize={"14px"} fontWeight={"500"} mb={"1rem"}>
                         Brand
                       </Text>
-                      <CheckboxGroup colorScheme="green">
+                      <CheckboxGroup
+                        colorScheme="green"
+                        defaultValue={brand}
+                        onChange={brandHandler}
+                      >
                         <VStack
                           direction={["column", "row"]}
                           alignItems={"baseline"}
                           fontSize={"12px"}
                           fontWeight={"375"}
                         >
-                          <Checkbox value="Organic">Organic</Checkbox>
-                          <Checkbox value="Hoovu Fresh">Hoovu Fresh</Checkbox>
-                          <Checkbox value="Brotos">Brotos</Checkbox>
+                          <Checkbox value="The Moms Co">The Moms Co</Checkbox>
+                          <Checkbox value="Amul">Amul</Checkbox>
+                          <Checkbox value="Amule">Amule</Checkbox>
                           <Checkbox value="Fresho">Fresho</Checkbox>
+                          <Checkbox value="Nivea">Nivea</Checkbox>
+                          <Checkbox value="ColorBar">ColorBar</Checkbox>
+                          <Checkbox value="Vi-jhon">Vi-jhon</Checkbox>
+                          <Checkbox value="Better Body Bombay">
+                            Better Body Bombay
+                          </Checkbox>
+                          <Checkbox value="Himalay">Himalay</Checkbox>
                         </VStack>
                       </CheckboxGroup>
                     </Box>
                     <Box pb={"1rem"} mb="1rem" borderBottom="1px solid #e8e8e8">
                       <Text fontSize={"14px"} fontWeight={"500"} mb={"1rem"}>
-                        Pack Size
+                        Category
                       </Text>
-                      <CheckboxGroup colorScheme="green">
+                      <CheckboxGroup
+                        colorScheme="green"
+                        defaultValue={category}
+                        onChange={categoryHandler}
+                      >
                         <VStack
                           direction={["column", "row"]}
                           alignItems={"baseline"}
                           fontSize={"12px"}
                           fontWeight={"375"}
                         >
-                          <Checkbox value="1">1 kg</Checkbox>
-                          <Checkbox value="2">2 pcs</Checkbox>
-                          <Checkbox value="40">40cm</Checkbox>
-                          <Checkbox value="100">100 g</Checkbox>
-                          <Checkbox value="250">250 g</Checkbox>
-                        </VStack>
-                      </CheckboxGroup>
-                    </Box>
-                    <Box pb={"1rem"} mb="1rem" borderBottom="1px solid #e8e8e8">
-                      <Text fontSize={"14px"} fontWeight={"500"} mb={"1rem"}>
-                        Price
-                      </Text>
-                      <CheckboxGroup colorScheme="green">
-                        <VStack
-                          direction={["column", "row"]}
-                          alignItems={"baseline"}
-                          fontSize={"12px"}
-                          fontWeight={"375"}
-                        >
-                          <Checkbox value="0-50">0-50</Checkbox>
-                          <Checkbox value="51-100">51-100</Checkbox>
-                          <Checkbox value="101-150">101-150</Checkbox>
+                          <Checkbox value="All">All</Checkbox>
+                          <Checkbox value="Beauty">Beauty</Checkbox>
+                          <Checkbox value="bakery">Bakery</Checkbox>
+                          <Checkbox value="fruitsvegetabls">
+                            Fruits&vegetables
+                          </Checkbox>
+                          <Checkbox value="kitchen">Kitchen</Checkbox>
+                          <Checkbox value="vegetables">vegetables</Checkbox>
+                          <Checkbox value="fruits">Fruits</Checkbox>
                         </VStack>
                       </CheckboxGroup>
                     </Box>
@@ -151,7 +199,7 @@ export const ProductsPage = () => {
                 <Flex flexWrap={"wrap"} borderTop={"1px solid #e8e8e8"}>
                   {data.product &&
                     data.product.map((e) => {
-                      return <ProductComponent key={e._id} props={{...e}} />;
+                      return <ProductComponent key={e._id} props={{ ...e }} />;
                     })}
                 </Flex>
               </Box>
