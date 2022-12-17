@@ -110,7 +110,7 @@ return (
           <Logo />
         </Flex>
         <Text pt={6} fontSize={'sm'} textAlign={'center'}>
-          © 2022 Chakra Templates. All rights reserved
+          © 2022 Big Basket. All rights reserved
         </Text>
       </Box>
     </Box>

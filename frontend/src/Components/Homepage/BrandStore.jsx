@@ -4,13 +4,13 @@ import './BrandStore.module.css'
 
 import { Grid, Image, Segment } from "semantic-ui-react";
 
-
+import {Link} from 'react-router-dom'
 
 export const BrandStore = () => (
     <div>
       <p style={{ textAlign: "center", fontSize: "20px" }}>Brand Store</p>
       <div className="ui clearing divider" ></div>
-      <Grid doubling columns={6} >
+      <Link to="/products">    <Grid doubling columns={6} >
       
         <Grid.Column >
         {/* <p className="boxes" style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}> */}
@@ -57,7 +57,7 @@ export const BrandStore = () => (
           </Segment>
           </div>
         </Grid.Column>
-      </Grid>
+      </Grid></Link>
     </div>
   );
   
