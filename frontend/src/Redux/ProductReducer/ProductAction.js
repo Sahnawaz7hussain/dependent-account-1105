@@ -1,7 +1,6 @@
 import * as types from "./ProductActionType";
 import axios from "axios";
-let base_url = "https://hilarious-kerchief-crab.cyclic.app/product";
-
+let base_url = process.env.REACT_APP_BASE_URL;
 const getProductsActionFn = (payload) => (dispatch) => {
   dispatch({ type: types.GET_PRODUCTS_REQUEST });
   return axios
@@ -14,11 +13,11 @@ const getProductsActionFn = (payload) => (dispatch) => {
       return dispatch({
         type: types.GET_PRODUCTS_SUCCESS,
         payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({ type: types.GET_PRODUCTS_FAILURE, payload: err.message });
       });
-    })
-    .catch((err) => {
-      dispatch({ type: types.GET_PRODUCTS_FAILURE, payload: err.message });
-    });
-};
+  };
 
-export {getProductsActionFn}
+export { getProductsActionFn };

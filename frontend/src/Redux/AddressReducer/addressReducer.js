@@ -30,6 +30,47 @@ const reducer = (oldState = initialAddressData, action) => {
         isAddressError: true,
         address: {},
       };
+    case types.POST_ADDRESS_REQUEST:
+      return {
+        ...oldState,
+        isAddressLoading: true,
+        isAddressError: false,
+        address: {},
+      };
+    case types.POST_ADDRESS_SUCCESS:
+      return {
+        ...oldState,
+        isAddressError: false,
+        isAddressLoading: false,
+        address: payload,
+      };
+    case types.POST_ADDRESS_FAILURE:
+      return {
+        ...oldState,
+        isAddressError: true,
+        isAddressLoading: false,
+        address: {},
+      };
+    case types.UPDATE_ADDRESS_REQUEST:
+      return {
+        isAddressLoading: true,
+        isAddressError: false,
+        address: {},
+      };
+    case types.UPDATE_ADDRESS_SUCCESS:
+      return {
+        ...oldState,
+        isAddressLoading: false,
+        isAddressError: false,
+        address: payload,
+      };
+    case types.UPDATE_ADDRESS_FAILURE:
+      return {
+        ...oldState,
+        isAddressLoading: false,
+        isAddressError: true,
+        address: {},
+      };
     default:
       return oldState;
   }

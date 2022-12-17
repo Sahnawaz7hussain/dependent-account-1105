@@ -1,6 +1,7 @@
 const jwt=require("jsonwebtoken")
 const Authentication=async(req,res,next)=>{
-    const token=req.body.authorization.split(" ")[1];
+    const token=req.headers.authorization.split(" ")[1];
+    
     if(token){
         const decoded=await jwt.verify(token,process.env.JWT)
         if(decoded?.userid.length>0){

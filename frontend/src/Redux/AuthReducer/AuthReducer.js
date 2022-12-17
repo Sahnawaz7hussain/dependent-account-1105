@@ -6,12 +6,12 @@ import * as types from "./AuthActionTypes";
 
 let userToken = getLocalStorageData("JWTTOKEN");
 const isAuth = userToken ? true : false;
-console.log("userTokan");
+//console.log("userTokan");
 const initAuthData = {
   isAuth: isAuth,
   isAuthLoading: false,
   isAuthError: false,
-  authData: {},
+  authData: userToken || {},
   authErr: {},
 };
 const reducer = (oldState = initAuthData, action) => {
@@ -24,6 +24,7 @@ const reducer = (oldState = initAuthData, action) => {
         isAuthError: false,
         authData: {},
         authErr: {},
+        isAuth: false,
       };
     case types.USER_SIGNUP_SUCCESS:
       return {
@@ -32,6 +33,7 @@ const reducer = (oldState = initAuthData, action) => {
         isAuthError: false,
         authData: payload,
         authErr: {},
+        isAuth: false,
       };
     case types.USER_SIGNUP_FAILURE:
       return {
@@ -40,6 +42,7 @@ const reducer = (oldState = initAuthData, action) => {
         isAuthError: true,
         authData: {},
         authErr: payload,
+        isAuth: false,
       };
     case types.USER_LOGIN_REQUEST:
       return {
@@ -48,6 +51,7 @@ const reducer = (oldState = initAuthData, action) => {
         isAuthError: false,
         authData: {},
         authErr: {},
+        isAuth: false,
       };
     case types.USER_LOGIN_SUCCESS:
       saveToLocalStorage("JWTTOKEN", payload.token);
@@ -55,7 +59,7 @@ const reducer = (oldState = initAuthData, action) => {
         ...oldState,
         isAuthLoading: false,
         isAuthError: false,
-        authData: payload,
+        authData: payload.token,
         isAuth: true,
         authErr: {},
       };
@@ -66,6 +70,7 @@ const reducer = (oldState = initAuthData, action) => {
         isAuthError: true,
         authData: {},
         authErr: payload,
+        isAuth: false,
       };
     default:
       return oldState;
