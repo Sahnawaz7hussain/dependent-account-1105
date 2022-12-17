@@ -3,7 +3,7 @@ import axios from "axios";
 let base_url = process.env.REACT_APP_BASE_URL;
 
 const getCartItemsActionFn = (headers) => (dispatch) => {
-  console.log("action header:", headers);
+  // console.log("action header:", headers);
   dispatch({ type: types.GET_CART_ITEMS_REQUEST });
   return axios
     .get(`${base_url}/cart`, { headers })
@@ -18,10 +18,11 @@ const getCartItemsActionFn = (headers) => (dispatch) => {
     });
 };
 
-const postCartItmeActionFn = (data) => (dispatch) => {
+const postCartItmeActionFn = (data, headers) => (dispatch) => {
+  console.log("cart action data,", data, headers);
   dispatch({ type: types.POST_CART_ITEMS_REQUEST });
   return axios
-    .post(`${base_url}/cart`, data)
+    .post(`${base_url}/cart`, data, { headers })
     .then((res) => {
       return dispatch({
         type: types.POST_CART_ITEMS_SUCCESS,

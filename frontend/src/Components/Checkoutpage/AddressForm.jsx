@@ -9,9 +9,14 @@ import {
   Spacer,
   Stack,
   VStack,
+  useToast,
+  Spinner,
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { postAddressActionFn } from "../../Redux/AddressReducer/addressActions";
 
 const initialAddress = {
   fullname: "",
@@ -25,6 +30,13 @@ const initialAddress = {
 
 const AddressForm = () => {
   const [address, setAddress] = useState(initialAddress);
+  const toast = useToast();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const data = useSelector((store) => {
+    return store.addressReducer;
+  });
 
   const handleFormOnChange = (e) => {
     let { name, value } = e.target;
@@ -35,11 +47,44 @@ const AddressForm = () => {
   };
 
   const hanldeAddingAddress = () => {
-    localStorage.setItem("baddress", JSON.stringify(address));
-    console.log("buyer address: ", address);
-    alert("hello world");
+    dispatch(postAddressActionFn(address))
+      .then((res) => {
+        console.log("addpost res;", res);
+        if (res.type === "POST_ADDRESS_SUCCESS") {
+          toast({
+            title: "Addrss Added.",
+            description: "We've added your address.",
+            status: "success",
+            position: "top",
+            duration: 900,
+            isClosable: true,
+          });
+          navigate("/checkout");
+        }
+        if (res.type === "POST_ADDRESS_FAILURE") {
+          return toast({
+            title: "Something went wrong.",
+            description: "Please try again..",
+            status: "error",
+            position: "top",
+            duration: 9000,
+            isClosable: true,
+          });
+        }
+      })
+      .catch((err) => {
+        toast({
+          title: "Something went wrong.",
+          description: "Please try again..",
+          status: "error",
+          position: "top",
+          duration: 9000,
+          isClosable: true,
+        });
+      });
   };
-  console.log("address: ", address);
+  // console.log("address: ", address);
+  // console.log("addressdaa; ", data);
   return (
     <Container>
       <Box
@@ -163,7 +208,7 @@ const AddressForm = () => {
           bg={"brand.100"}
           _hover={{ bg: "brand.200" }}
         >
-          ADD
+          {data.isAddressLoading ? <Spinner /> : "ADD"}
         </Button>
       </Box>
     </Container>

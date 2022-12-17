@@ -1,28 +1,37 @@
-
 //  this is card page
 
-
-
-import { Box, Text, Stack, Image, Flex, Center, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Stack,
+  Image,
+  Flex,
+  Center,
+  Button,
+} from "@chakra-ui/react";
 import { MdLocalShipping } from "react-icons/md";
 import "./ProductCom.css";
 import { Link } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { postCartItmeActionFn } from "../../Redux/CartReducer/cartActions";
+import userHeader from "../../utils/headers";
 // import { addtoCart, addtocartaction } from "../../Redux/product/action";
-export const ProductComponent = ({props}) => {
+export const ProductComponent = ({ props }) => {
+  const { brand, image, _id, category, cost, title, stock } = props;
+  const dispatch = useDispatch();
 
-  const {brand,image,_id,category,cost,title,stock}=props
-
-  // console.log(title,"props")
-  // console.log(category,"props")
-  // console.log(props.image,"props")
-  
-  
-  const handleCart=()=>{
-    // console.log("data",data)
-    // dispatch(addtocartaction(data))
-    // dispatch(addtoCart(data));
-  }
+  const handleAddToCart = () => {
+    const payload = {
+      product: _id,
+    };
+    dispatch(postCartItmeActionFn(payload, userHeader))
+      .then((res) => {
+        console.log("cart post res", res);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  };
 
   return (
     <Box
@@ -76,7 +85,7 @@ export const ProductComponent = ({props}) => {
               </span>
             </Text>
           </Stack>
-          <Button variant={"outline"} p="0" onClick={() => handleCart()}>
+          <Button variant={"outline"} p="0" onClick={handleAddToCart}>
             Add to cart
           </Button>
           <Stack direction="row" alignItems="center" justifyContent={"center"}>
@@ -91,5 +100,3 @@ export const ProductComponent = ({props}) => {
     </Box>
   );
 };
-
-
