@@ -16,9 +16,7 @@ import Footer from "./Components/Footer/Footer";
 function App() {
   return (
     <div className="App">
-
-       <WithSubnavigation /> 
-
+      {/* <WithSubnavigation /> */}
 
       <Navbar />
 
@@ -29,13 +27,8 @@ function App() {
       {/* <Card /> */}
 
       <MainRoutes />
-
     </div>
   );
 }
-      <Footer />
-      </div>
-  )
-  }
 
 export { App };

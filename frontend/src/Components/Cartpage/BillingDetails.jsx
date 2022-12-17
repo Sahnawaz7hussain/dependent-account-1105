@@ -10,8 +10,6 @@ import {
 import React from "react";
 
 const BillingDetails = ({ baseW = 100, mdW = 34, xlW = 29 }) => {
-  console.log("xl: ", xlW);
-
   return (
     <Box
       minW={{ base: `${baseW}%`, md: `${mdW}%`, xl: `${xlW}%` }}
@@ -20,6 +18,7 @@ const BillingDetails = ({ baseW = 100, mdW = 34, xlW = 29 }) => {
       p={[5, 10, 15]}
       border={"1px solid lightgray"}
       m="auto"
+      mt="0"
     >
       <Heading fontWeight={600} my="7px" ml="1%" as="h2" size="md">
         Price Details

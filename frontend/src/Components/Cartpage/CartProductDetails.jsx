@@ -8,13 +8,48 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  deleteCartItemsActionFn,
+  updateCartItemsActionFn,
+} from "../../Redux/CartReducer/cartActions";
 
-const CartProductDetails = () => {
-  const cartData = useSelector((store) => {
-    return store.cartReducer;
-  });
-  console.log("cartReducer ", cartData);
+const CartProductDetails = ({ data }) => {
+  const dispatch = useDispatch();
+  // const cartData = useSelector((store) => {
+  //   return store.cartReducer;
+  // });
+
+  const handleIncCartQty = (id, qty) => {
+    dispatch(updateCartItemsActionFn(id, { qty }))
+      .then((res) => {
+        console.log("res: ", res);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  };
+  const handleDecCartQty = (id, qty) => {
+    dispatch(updateCartItemsActionFn(id, { qty }))
+      .then((res) => {
+        console.log("res: ", res);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  };
+
+  const handleDeleteCartItem = (id) => {
+    dispatch(deleteCartItemsActionFn(id))
+      .then((res) => {
+        console.log("delete cart res", res);
+      })
+      .catch((err) => {
+        console.log("delete cart res; ", res);
+      });
+  };
+
+  console.log("cartData ", data);
   return (
     <Box
       boxSizing={"border-box"}
@@ -28,61 +63,78 @@ const CartProductDetails = () => {
         Cart Items
       </Heading>
       <hr />
-      <Box
-        display={{ sm: "block", md: "flex", xl: "flex" }}
-        justifyContent={"space-between"}
-        alignItems={"center"}
-        boxSizing="border-box"
-        p="10px"
-        borderBottom={"0px solid grey"}
-        boxShadow="0px 1px 1px 0px lightgray"
-      >
-        <Stack border={"0px solid teal"} width="95%" direction="flex">
-          <Image
-            w="100px"
-            src="https://rukminim1.flixcart.com/image/120/120/l5jxt3k0/coffee/j/2/r/-original-imagg7asw99yzg3h.jpeg"
-          />
-          <Stack ml={{ xl: "4%" }} border={"0px solid red"}>
-            <Text as="b">Nescafe Sunrise Instant Coffee</Text>
-            <Text> wgt - 200 g</Text>
-            <Flex>
-              <Text>₹708</Text>
-              <Text color="red" as="del" ml="20px">
-                ₹53
-              </Text>
-            </Flex>
-          </Stack>
-        </Stack>
-        <Box
-          mt={["10px"]}
-          display={"flex"}
-          direction={{ sm: "row" }}
-          spacing="60px"
-          border={"0px solid red"}
-        >
-          <Flex alignItems={"center"}>
-            <Button size="sm" variant={"ghost"} fontSize={"23px"}>
-              -
-            </Button>
-            <Button
-              rounded={"none"}
-              mx="5px"
-              size="sm"
-              variant={"outline"}
-              colorScheme="gray"
-            >
-              4
-            </Button>
-            <Button size="sm" variant={"ghost"} fontSize={"20px"}>
-              +
-            </Button>
-          </Flex>
 
-          <Button ml="20px" variant={"outline"} colorScheme="green" size="sm">
-            Remove
-          </Button>
-        </Box>
-      </Box>
+      {data.length > 0 &&
+        data.map((el) => (
+          <Box
+            key={el._id}
+            display={{ sm: "block", md: "flex", xl: "flex" }}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            boxSizing="border-box"
+            p="10px"
+            border={"2px solid blue"}
+            // borderBottom={"0px solid grey"}
+            boxShadow="0px 1px 1px 0px lightgray"
+          >
+            <Stack border={"0px solid teal"} width="95%" direction="flex">
+              <Image w="100px" src={el.product.image} />
+              <Stack ml={{ xl: "4%" }} border={"0px solid red"}>
+                <Text as="b">{el.product.title}</Text>
+                <Text>{el.product.category}</Text>
+
+                <Text>₹{el.product.cost}</Text>
+              </Stack>
+            </Stack>
+            <Box
+              mt={["10px"]}
+              display={"flex"}
+              direction={{ sm: "row" }}
+              spacing="60px"
+              border={"0px solid red"}
+            >
+              <Flex alignItems={"center"}>
+                <Button
+                  onClick={() => handleDecCartQty(el._id, el.qty - 1)}
+                  size="sm"
+                  variant={"ghost"}
+                  fontSize={"23px"}
+                >
+                  -
+                </Button>
+                <Button
+                  rounded={"none"}
+                  mx="5px"
+                  size="sm"
+                  variant={"outline"}
+                  colorScheme="gray"
+                >
+                  {el.qty}
+                </Button>
+                <Button
+                  onClick={() => handleIncCartQty(el._id, el.qty + 1)}
+                  size="sm"
+                  variant={"ghost"}
+                  fontSize={"20px"}
+                >
+                  +
+                </Button>
+              </Flex>
+
+              <Button
+                onClick={() => handleDeleteCartItem(el._id)}
+                ml="20px"
+                variant={"outline"}
+                colorScheme="green"
+                size="sm"
+              >
+                Remove
+              </Button>
+            </Box>
+          </Box>
+        ))}
+
+      {/* CHECKOUT BUTTON  */}
       <Flex boxSizing="border-box" p={2} flexDir={"row-reverse"}>
         <Button
           rounded={"none"}
