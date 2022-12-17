@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 
-import { json, Link } from 'react-router-dom'
+import { json, Link } from "react-router-dom";
 
 import {
   Box,
@@ -23,8 +23,18 @@ import {
   Spacer,
   InputGroup,
   InputRightElement,
-  useColorMode, FormLabel,
-  FormControl, Switch, Drawer, Show, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerFooter, DrawerBody
+  useColorMode,
+  FormLabel,
+  FormControl,
+  Switch,
+  Drawer,
+  Show,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  DrawerHeader,
+  DrawerFooter,
+  DrawerBody,
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
@@ -33,10 +43,8 @@ import {
   ChevronRightIcon,
   MoonIcon,
   SunIcon,
-  Search2Icon
-
+  Search2Icon,
 } from "@chakra-ui/icons";
-
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
@@ -49,16 +57,14 @@ export default function Navbar() {
 
     window.addEventListener("resize", handleResizeWindow);
     return () => {
-
       window.removeEventListener("resize", handleResizeWindow);
     };
   }, []);
-  //----------------------------------------------- 
+  //-----------------------------------------------
   return (
     <>
-      <Box>
+      <Box position="fixed" top={0} zIndex={5}>
         <Flex
-          position="fixed"
           w="80%"
           style={{
             zIndex: 2,
@@ -83,7 +89,7 @@ export default function Navbar() {
             ml={{ base: -2 }}
             display={{ base: "flex", md: "none" }}
           >
-            < DrawerExample
+            <DrawerExample
               onClick={onToggle}
               icon={
                 isOpen ? (
@@ -97,12 +103,7 @@ export default function Navbar() {
             />
           </Flex>
 
-          <Stack
-            direction={"row"}
-            spacing={6}
-            ml={10}
-          >
-
+          <Stack direction={"row"} spacing={6} ml={10}>
             <Finest />
             {/* <Image
               boxSize="60px"
@@ -111,7 +112,7 @@ export default function Navbar() {
             /> */}
           </Stack>
 
-          <Flex flex={{ base: 1 }} justify={{ base: "space-around", md: '' }}>
+          <Flex flex={{ base: 1 }} justify={{ base: "space-around", md: "" }}>
             <Flex display={{ base: "none", md: "flex" }} ml={10}>
               <DesktopNav />
             </Flex>
@@ -134,7 +135,6 @@ export default function Navbar() {
                     </div>)}
                 </div>}
           </Stack> */}
-
         </Flex>
         {/* <Flex spacing={8} pr={'45rem'}>
         <DesktopNav2 />
@@ -145,15 +145,10 @@ export default function Navbar() {
           <MobileNav />
           {/* </DrawerExample> */}
         </Collapse>
-
-   
       </Box>
-
     </>
   );
-
 }
-
 
 const Finest = () => {
   return (
@@ -164,12 +159,10 @@ const Finest = () => {
         alt="Icon"
       />
     </div>
-  )
-
-}
+  );
+};
 
 const SignLog = () => {
-
   return (
     <div>
       <Stack
@@ -190,7 +183,8 @@ const SignLog = () => {
             }}
           >
             Log In
-          </Button></Link>
+          </Button>
+        </Link>
         <Link to="/signup">
           <Button
             display={{ base: "none", md: "inline-flex" }}
@@ -208,55 +202,54 @@ const SignLog = () => {
         </Link>
       </Stack>
     </div>
-  )
-}
-
-
+  );
+};
 
 const DesktopNav2 = () => {
-
   const [search, setSearch] = useState();
-
 
   //--------------------------------------------
   const debounce = (func) => {
     let timer;
     return function (...args) {
       const context = this;
-      if (timer) clearTimeout(timer)
+      if (timer) clearTimeout(timer);
       timer = setTimeout(() => {
-        timer = null
+        timer = null;
         func.apply(context, args);
       }, 500);
-    }
-  }
-
+    };
+  };
 
   const handleChange = (event) => {
     const { value } = event.target;
-    fetch(`https://hilarious-kerchief-crab.cyclic.app/product/search?q=${value}`)
-      .then(data => {
+    fetch(
+      `https://hilarious-kerchief-crab.cyclic.app/product/search?q=${value}`
+    )
+      .then((data) => {
         return data.json();
       })
-      .then(resp => {
-        setSearch(json.resp)
+      .then((resp) => {
+        setSearch(json.resp);
         console.log(...resp);
       });
     // console.log(resp);
-  }
+  };
 
-  const optimisedVersion = useCallback(debounce(handleChange), [])
-
-
-
+  const optimisedVersion = useCallback(debounce(handleChange), []);
 
   return (
     <div>
-      <Stack borderColor={"red"}  border="2px" flex={{ base: 1, md: 0.7 }}>
+      <Stack borderColor={"red"} border="2px" flex={{ base: 1, md: 0.7 }}>
         <InputGroup size="md" background={"white"}>
-          <Input minW={'350px'} placeholder="Search Products"
-            type={'text'} name={'search'} className={'search'}
-            onChange={optimisedVersion} />
+          <Input
+            minW={"350px"}
+            placeholder="Search Products"
+            type={"text"}
+            name={"search"}
+            className={"search"}
+            onChange={optimisedVersion}
+          />
           <InputRightElement width="4.5rem">
             <Button h="2.4rem" size="lg">
               <Search2Icon />
@@ -288,17 +281,13 @@ const DesktopNav2 = () => {
             </Dropdown> */}
       </Stack>
     </div>
-
-  )
-
-}
+  );
+};
 const DesktopNav = () => {
   const linkColor = useColorModeValue("gray.600", "gray.200");
   const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
   const { colorMode, toggleColorMode } = useColorMode();
-
-
 
   return (
     <Stack direction={"row"} spacing={9}>
@@ -316,7 +305,7 @@ const DesktopNav = () => {
                   textDecoration: "none",
                   color: linkHoverColor,
                 }}
-                to='/products'
+                to="/products"
               >
                 {navItemss.label}
               </Link>
@@ -342,17 +331,15 @@ const DesktopNav = () => {
         </Box>
       ))}
       <Button onClick={toggleColorMode} spacing={4}>
-        {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+        {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
       </Button>
-      <Flex spacing={8} pl={'15rem'} >
+      <Flex spacing={8} pl={"15rem"}>
         <DesktopNav2 />
       </Flex>
       {/* <Flex>
         <SignLog />
       </Flex> */}
-
     </Stack>
-
   );
 };
 
@@ -391,50 +378,43 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
       </Stack>
     </Link>
   );
-
 };
 
-
-
 const MobileView = () => {
-
-
   const [search, setSearch] = useState();
 
   const debounce = (func) => {
     let timer;
     return function (...args) {
       const context = this;
-      if (timer) clearTimeout(timer)
+      if (timer) clearTimeout(timer);
       timer = setTimeout(() => {
-        timer = null
+        timer = null;
         func.apply(context, args);
       }, 500);
-    }
-  }
-
+    };
+  };
 
   const handleChange = (event) => {
     const { value } = event.target;
-    fetch(`https://hilarious-kerchief-crab.cyclic.app/product/search?q=${value}`)
-      .then(data => {
+    fetch(
+      `https://hilarious-kerchief-crab.cyclic.app/product/search?q=${value}`
+    )
+      .then((data) => {
         return data.json();
       })
-      .then(resp => {
-        setSearch(json.resp)
+      .then((resp) => {
+        setSearch(json.resp);
         console.log(...resp);
       });
     // console.log(resp);
-  }
+  };
 
-  const optimisedVersion = useCallback(debounce(handleChange), [])
-
+  const optimisedVersion = useCallback(debounce(handleChange), []);
 
   return (
     <div>
-
       const [search, setSearch] = useState();
-
       <Stack>
         {/* <InputGroup>
     <Input>
@@ -448,27 +428,27 @@ const MobileView = () => {
             </Button>
           </InputRightElement>
         </InputGroup> */}
-
       </Stack>
     </div>
-  )
-}
+  );
+};
 
 const MobileNav = () => {
-  return (<>
-    <Stack
-      bg={useColorModeValue("white", "gray.800")}
-      p={7}
-      display={{ md: "none" }}
-    >
-      {NAV_ITEMS.map((navItemss) => (
-        <MobileNavItemss key={navItemss.label} {...navItemss} />
-      ))}
-    </Stack>
-    <Flex spacing={4} pl={'20rem'}>
-      <DesktopNav2 />
-    </Flex>
-  </>
+  return (
+    <>
+      <Stack
+        bg={useColorModeValue("white", "gray.800")}
+        p={7}
+        display={{ md: "none" }}
+      >
+        {NAV_ITEMS.map((navItemss) => (
+          <MobileNavItemss key={navItemss.label} {...navItemss} />
+        ))}
+      </Stack>
+      <Flex spacing={4} pl={"20rem"}>
+        <DesktopNav2 />
+      </Flex>
+    </>
   );
 };
 
@@ -567,63 +547,61 @@ const NAV_ITEMS = [
   },
 ];
 
-
-
-
-
-
-
-
-
-
 function DrawerExample() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = React.useRef()
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = React.useRef();
 
   return (
     <>
-
-      <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
+      <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
         <HamburgerIcon />
       </Button>
       <Drawer
         isOpen={isOpen}
-        placement='right'
+        placement="right"
         onClose={onClose}
         finalFocusRef={btnRef}
       >
         <DrawerOverlay />
         <DrawerContent>
-        <DrawerHeader>
-          <br />
+          <DrawerHeader>
+            <br />
             <DesktopNav2 />
 
-          <DrawerCloseButton />
-          <DrawerHeader>    <Stack
-            bg={useColorModeValue("white", "gray.800")}
-            p={7}
-            display={{ md: "none" }}
-          >
-            {NAV_ITEMS.map((navItemss) => (
-              <MobileNavItemss key={navItemss.label} {...navItemss} />
-            ))}
-          </Stack>
-          </DrawerHeader>
+            <DrawerCloseButton />
+            <DrawerHeader>
+              {" "}
+              <Stack
+                bg={useColorModeValue("white", "gray.800")}
+                p={7}
+                display={{ md: "none" }}
+              >
+                {NAV_ITEMS.map((navItemss) => (
+                  <MobileNavItemss key={navItemss.label} {...navItemss} />
+                ))}
+              </Stack>
+            </DrawerHeader>
           </DrawerHeader>
 
           <DrawerBody>
-          <Link to='./login'><Button mr={9} colorScheme='blue'>Login</Button></Link>
-        <Link to='./signup'><Button colorScheme='blue'>Signup</Button></Link>
+            <Link to="./login">
+              <Button mr={9} colorScheme="blue">
+                Login
+              </Button>
+            </Link>
+            <Link to="./signup">
+              <Button colorScheme="blue">Signup</Button>
+            </Link>
             {/* <DesktopNav2 /> */}
           </DrawerBody>
 
           <DrawerFooter>
-          <Button variant='outline' onClick={onClose}>
+            <Button variant="outline" onClick={onClose}>
               Close
             </Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>
-  )
+  );
 }

@@ -38,8 +38,13 @@ const Checkoutpage = () => {
 
   return (
     <>
-      {isAddressLoading && <Heading>Loading.........</Heading>}
-      <Box w={{ base: "99%", md: "90%", xl: "65%" }} p="20px" m="auto">
+      {isAddressLoading && <Heading mt="200px">Loading.........</Heading>}
+      <Box
+        w={{ base: "99%", md: "90%", xl: "65%" }}
+        p="20px"
+        m="auto"
+        mt="80px"
+      >
         <Heading mb="10px" as="h1" fontWeight={500} fontSize={"20px"}>
           Checkout
         </Heading>
