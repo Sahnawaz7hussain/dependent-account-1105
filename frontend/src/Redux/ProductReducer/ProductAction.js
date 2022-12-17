@@ -1,17 +1,18 @@
 import * as types from "./ProductActionType";
 import axios from "axios";
 let base_url = process.env.REACT_APP_BASE_URL;
-
-const getProductsActionFn =
-  (params = {}) =>
-  (dispatch) => {
-    dispatch({ type: types.GET_PRODUCTS_REQUEST });
-    return axios
-      .get(`${base_url}/product`, params)
-      .then((res) => {
-        return dispatch({
-          type: types.GET_PRODUCTS_SUCCESS,
-          payload: res.data,
+const getProductsActionFn = (payload) => (dispatch) => {
+  dispatch({ type: types.GET_PRODUCTS_REQUEST });
+  return axios
+    .get(`${base_url}`, {
+      params: {
+        ...payload,
+      },
+    })
+    .then((res) => {
+      return dispatch({
+        type: types.GET_PRODUCTS_SUCCESS,
+        payload: res.data,
         });
       })
       .catch((err) => {
