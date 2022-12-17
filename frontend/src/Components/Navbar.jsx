@@ -210,6 +210,9 @@ const SignLog = () => {
     </div>
   )
 }
+
+
+
 const DesktopNav2 = () => {
 
   const [search, setSearch] = useState();
@@ -249,9 +252,9 @@ const DesktopNav2 = () => {
 
   return (
     <div>
-      <Stack flex={{ base: 1, md: 0.7 }}>
+      <Stack borderColor={"red"}  border="2px" flex={{ base: 1, md: 0.7 }}>
         <InputGroup size="md" background={"white"}>
-          <Input placeholder="Search Products"
+          <Input minW={'350px'} placeholder="Search Products"
             type={'text'} name={'search'} className={'search'}
             onChange={optimisedVersion} />
           <InputRightElement width="4.5rem">
@@ -261,7 +264,7 @@ const DesktopNav2 = () => {
           </InputRightElement>
         </InputGroup>
         {/* <Dropdown>
-                    {data
+                    {data b
                       .filter((item) => {
                         const searchTerm = value.toLowerCase();
                         const fullName = item.full_name.toLowerCase();
@@ -341,7 +344,7 @@ const DesktopNav = () => {
       <Button onClick={toggleColorMode} spacing={4}>
         {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
       </Button>
-      <Flex spacing={8} pl={'15rem'}>
+      <Flex spacing={8} pl={'15rem'} >
         <DesktopNav2 />
       </Flex>
       {/* <Flex>
