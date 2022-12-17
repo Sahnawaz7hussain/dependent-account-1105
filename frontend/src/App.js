@@ -16,26 +16,15 @@ import Footer from "./Components/Footer/Footer";
 function App() {
   return (
     <div className="App">
-
-       <WithSubnavigation /> 
-
-
       <Navbar />
-
       {/* <ProductsPage /> */}
       {/* <ProductDetails /> */}
       {/* <ProductComponent /> */}
       {/* <SiderBar /> */}
       {/* <Card /> */}
-
       <MainRoutes />
-
     </div>
   );
 }
-      <Footer />
-      </div>
-  )
-  }
 
 export { App };

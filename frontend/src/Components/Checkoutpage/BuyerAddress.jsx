@@ -19,6 +19,7 @@ import {
   VStack,
   Spacer,
   Spinner,
+  Image,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
