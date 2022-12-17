@@ -7,4 +7,4 @@ const addressSchema=mongoose.Schema({
 
 const Addressmodel=mongoose.model("address",addressSchema);
 
-module.exports={addressSchema}
+module.exports={Addressmodel}
