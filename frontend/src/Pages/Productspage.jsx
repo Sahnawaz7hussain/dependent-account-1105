@@ -21,7 +21,7 @@ import { getProductsActionFn } from "../Redux/ProductReducer/ProductAction";
 export const ProductsPage = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.productReducer);
-  console.log("data", data);
+  // console.log("data", data);
   const getProducts = () => {
     dispatch(getProductsActionFn());
   };
@@ -32,7 +32,7 @@ export const ProductsPage = () => {
   //  below this we user search params for products
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const [filter, setfilter] = useState(searchParams.get("filter"));
+  const [filter = "1", setfilter] = useState(searchParams.get("filter"));
   const [brand, setbrand] = useState(searchParams.getAll("brand"));
   const [category, setcategory] = useState(searchParams.getAll("category"));
   const [loading, setLoading] = useState(false);
@@ -62,11 +62,11 @@ export const ProductsPage = () => {
         { replace: true }
       );
       const params = {
-        brand: searchParams.getAll("brand") || [],
-        filter: searchParams.get("filter") || 1,
-        category: searchParams.getAll("category") || [],
+        brand: searchParams.getAll("brand"),
+        filter: searchParams.get("filter"),
+        category: searchParams.getAll("category"),
       };
-      // console.log("SERARCH",params.order)
+
       dispatch(getProductsActionFn(params));
     }
     setLoading(true);
@@ -74,7 +74,6 @@ export const ProductsPage = () => {
 
   return (
     <Box width={"100%"}>
-      {/* <Topnavbar /> */}
       {data.product?.length == 0 ? (
         <Box width="98%">
           <LoadingComp />
@@ -138,7 +137,6 @@ export const ProductsPage = () => {
                         >
                           <Checkbox value="The Moms Co">The Moms Co</Checkbox>
                           <Checkbox value="Amul">Amul</Checkbox>
-                          <Checkbox value="Amule">Amule</Checkbox>
                           <Checkbox value="Fresho">Fresho</Checkbox>
                           <Checkbox value="Nivea">Nivea</Checkbox>
                           <Checkbox value="ColorBar">ColorBar</Checkbox>
