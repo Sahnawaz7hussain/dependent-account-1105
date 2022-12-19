@@ -14,7 +14,6 @@ const reducer = (oldState = initialCartData, action) => {
         ...oldState,
         isCartLoading: true,
         isCartError: false,
-        cartItems: [],
       };
     case types.GET_CART_ITEMS_SUCCESS:
       return {

@@ -1,6 +1,5 @@
 import * as types from "./AuthActionTypes";
 import axios from "axios";
-import { removeFromLocalStorage } from "../../utils/useLocalData";
 const auth_url = process.env.REACT_APP_BASE_URL;
 
 const userSignupActionFn = (creds) => (dispatch) => {
@@ -34,9 +33,8 @@ const userLoginActionFn = (creds) => (dispatch) => {
     });
 };
 
-const userLogoutActionFn = () => {
-  removeFromLocalStorage("userToken");
-  return { msg: "Logout Success" };
+const userLogoutActionFn = () => (dispatch) => {
+  return dispatch({ type: types.USER_LOGOUT_REQUEST });
 };
 
 export { userSignupActionFn, userLoginActionFn, userLogoutActionFn };

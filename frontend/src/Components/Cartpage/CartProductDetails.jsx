@@ -7,49 +7,34 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  deleteCartItemsActionFn,
-  updateCartItemsActionFn,
-} from "../../Redux/CartReducer/cartActions";
-
-const CartProductDetails = ({ data }) => {
+import { Link } from "react-router-dom";
+import { getCartItemsActionFn } from "../../Redux/CartReducer/cartActions";
+///////////////////////////
+const CartProductDetails = ({
+  data = [],
+  handleDeleteCartItem,
+  handleDecCartQty,
+  handleIncCartQty,
+}) => {
+  //////////////////
   const dispatch = useDispatch();
+
+  // const getCartItems = () => {
+  //   return dispatch(getCartItemsActionFn());
+  // };
+
+  // useEffect(() => {
+  //   getCartItems();
+  // }, []);
   // const cartData = useSelector((store) => {
-  //   return store.cartReducer;
+  //   return store.cartReducer.cartItems;
   // });
+  console.log("cart Card ata", data);
 
-  const handleIncCartQty = (id, qty) => {
-    dispatch(updateCartItemsActionFn(id, { qty }))
-      .then((res) => {
-        console.log("res: ", res);
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
-  };
-  const handleDecCartQty = (id, qty) => {
-    dispatch(updateCartItemsActionFn(id, { qty }))
-      .then((res) => {
-        console.log("res: ", res);
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
-  };
+  // console.log("Data ", data);
 
-  const handleDeleteCartItem = (id) => {
-    dispatch(deleteCartItemsActionFn(id))
-      .then((res) => {
-        console.log("delete cart res", res);
-      })
-      .catch((err) => {
-        console.log("delete cart res; ", res);
-      });
-  };
-
-  console.log("cartData ", data);
   return (
     <Box
       boxSizing={"border-box"}
@@ -73,8 +58,8 @@ const CartProductDetails = ({ data }) => {
             alignItems={"center"}
             boxSizing="border-box"
             p="10px"
-            border={"2px solid blue"}
-            // borderBottom={"0px solid grey"}
+            // border={"2px solid blue"}
+            borderBottom={"1px solid grey"}
             boxShadow="0px 1px 1px 0px lightgray"
           >
             <Stack border={"0px solid teal"} width="95%" direction="flex">
@@ -122,10 +107,10 @@ const CartProductDetails = ({ data }) => {
               </Flex>
 
               <Button
-                onClick={() => handleDeleteCartItem(el._id)}
+                onClick={() => handleDeleteCartItem(el.product._id)}
                 ml="20px"
                 variant={"outline"}
-                colorScheme="green"
+                colorScheme="red"
                 size="sm"
               >
                 Remove
@@ -136,15 +121,17 @@ const CartProductDetails = ({ data }) => {
 
       {/* CHECKOUT BUTTON  */}
       <Flex boxSizing="border-box" p={2} flexDir={"row-reverse"}>
-        <Button
-          rounded={"none"}
-          left={0}
-          bg={"brand.100"}
-          color={"brand.white"}
-          _hover={{ bg: "brand.200" }}
-        >
-          CHECKOUT
-        </Button>
+        <Link to="/checkout">
+          <Button
+            rounded={"none"}
+            left={0}
+            bg={"brand.100"}
+            color={"brand.white"}
+            _hover={{ bg: "brand.200" }}
+          >
+            CHECKOUT
+          </Button>
+        </Link>
       </Flex>
     </Box>
   );

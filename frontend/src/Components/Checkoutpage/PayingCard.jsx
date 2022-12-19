@@ -15,12 +15,14 @@ import {
 import { BsArrowRightShort } from "react-icons/bs";
 import randomcards from "../../assets/randomcards.png";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const PayingCard = () => {
   const [cardNumber, setCardNumber] = useState("");
   const [mmyy, setMmyy] = useState("");
   const [cvv, setCvv] = useState("");
   const [holderName, setHolderName] = useState("");
   const toast = useToast();
+  const navigate = useNavigate();
 
   const handleOnChangeCvv = (e) => {
     setCvv(e.target.value);
@@ -76,6 +78,7 @@ const PayingCard = () => {
         isClosable: true,
         position: "top",
       });
+      navigate("/ordersuccess");
     }
   };
   return (

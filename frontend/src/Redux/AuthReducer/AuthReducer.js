@@ -1,5 +1,6 @@
 import {
   getLocalStorageData,
+  removeFromLocalStorage,
   saveToLocalStorage,
 } from "../../utils/useLocalData";
 import * as types from "./AuthActionTypes";
@@ -71,6 +72,15 @@ const reducer = (oldState = initAuthData, action) => {
         authData: {},
         authErr: payload,
         isAuth: false,
+      };
+    case types.USER_LOGOUT_REQUEST:
+      removeFromLocalStorage("JWTTOKEN");
+      return {
+        ...oldState,
+        isAuthLoading: false,
+        isAuthError: false,
+        isAuth: false,
+        authData: {},
       };
     default:
       return oldState;

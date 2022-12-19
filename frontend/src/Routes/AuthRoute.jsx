@@ -1,11 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 function AuthRoute({ children }) {
-  let obj = JSON.parse(localStorage.getItem("keyname")) || {};
+  const isAuth = useSelector((store) => store.authReducer.isAuth);
 
-  if ("not user found") {
-    return <Navigate to="/signin" />;
+  if (!isAuth) {
+    return <Navigate to="/login" />;
   }
 
   return children;
