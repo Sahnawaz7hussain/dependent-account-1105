@@ -57,10 +57,7 @@ export const ProductDetails = () => {
   };
   return (
     <Box width={"100%"} mt={"100px"}>
-      {/* <Topnavbar/> */}
-      {isProductLoading ? (
-        <Loading />
-      ) : (
+    
         <Box
           width={"75%"}
           margin={"auto"}
@@ -253,7 +250,7 @@ export const ProductDetails = () => {
             </Box>
           </Flex>
         </Box>
-      )}
+     
     </Box>
   );
 };
