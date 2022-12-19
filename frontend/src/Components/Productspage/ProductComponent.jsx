@@ -6,19 +6,23 @@ import {
   Stack,
   Image,
   Flex,
-  Center,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import { MdLocalShipping } from "react-icons/md";
 import "./ProductCom.css";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { postCartItmeActionFn } from "../../Redux/CartReducer/cartActions";
+import {
+  getCartItemsActionFn,
+  postCartItmeActionFn,
+} from "../../Redux/CartReducer/cartActions";
 import userHeader from "../../utils/headers";
 // import { addtoCart, addtocartaction } from "../../Redux/product/action";
 export const ProductComponent = ({ props }) => {
-  const { brand, image, _id, category, cost, title, stock } = props;
+  const { brand, image, _id, cost, title } = props;
   const dispatch = useDispatch();
+  const toast = useToast();
 
   const handleAddToCart = () => {
     const payload = {
@@ -26,6 +30,27 @@ export const ProductComponent = ({ props }) => {
     };
     dispatch(postCartItmeActionFn(payload, userHeader))
       .then((res) => {
+        console.log(res);
+        if (res.type === "POST_CART_ITEMS_SUCCESS") {
+          dispatch(getCartItemsActionFn());
+          return toast({
+            title: "Cart Status.",
+            description: "Item added successfully to cart",
+            status: "success",
+            duration: 2000,
+            position: "top",
+            isClosable: true,
+          });
+        } else {
+          toast({
+            title: "Cart Status.",
+            description: "Item already present in cart.",
+            status: "error",
+            duration: 2000,
+            position: "top",
+            isClosable: true,
+          });
+        }
         console.log("cart post res", res);
       })
       .catch((err) => {
@@ -34,10 +59,7 @@ export const ProductComponent = ({ props }) => {
   };
 
   return (
-    <Box
-      width={"33%"}
-      // border="1px solid blue"
-    >
+    <Box width={"33%"} border="0px solid blue" m="auto" mt={"100px"}>
       <Box
         className="transition"
         role={"group"}
@@ -85,7 +107,13 @@ export const ProductComponent = ({ props }) => {
               </span>
             </Text>
           </Stack>
-          <Button variant={"outline"} p="0" onClick={handleAddToCart}>
+          <Button
+            variant={"outline"}
+            p="0"
+            bg="brand.100"
+            color={"brand.white"}
+            onClick={handleAddToCart}
+          >
             Add to cart
           </Button>
           <Stack direction="row" alignItems="center" justifyContent={"center"}>

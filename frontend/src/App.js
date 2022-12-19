@@ -12,17 +12,16 @@ import Homepage from "./Pages/Homepage";
 // import  ProductDetails from "./Components/Productspage/ProductDetails";
 import MainRoutes from "./Routes/MainRoutes";
 import Footer from "./Components/Footer/Footer";
+import Navbar2 from "./Components/Navbar2";
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
-      {/* <ProductsPage /> */}
-      {/* <ProductDetails /> */}
-      {/* <ProductComponent /> */}
-      {/* <SiderBar /> */}
-      {/* <Card /> */}
+      {/* <Navbar /> */}
+
+      <Navbar2 />
       <MainRoutes />
+      <Footer />
     </div>
   );
 }

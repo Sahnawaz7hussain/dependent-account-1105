@@ -14,12 +14,15 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  Spinner,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { userSignupActionFn } from "../../Redux/AuthReducer/AuthActions";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+
 const signupData = {
   email: "",
   first_name: "",
@@ -31,6 +34,10 @@ export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [signUpData, setSignupData] = useState(signupData);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const toast = useToast();
+
+  const isAuthLoading = useSelector((store) => store.authReducer.isAuthLoading);
 
   const hadleSignupChange = (e) => {
     const { name, value } = e.target;
@@ -43,21 +50,60 @@ export default function Signup() {
   const handleSignupClick = () => {
     const { first_name, email, password } = signUpData;
     if (!first_name || !email || !password) {
-      alert("All field required: ");
-      return;
+      return toast({
+        title: "Signup Status.",
+        description: "All fields are required for signup.",
+        status: "error",
+        duration: 2000,
+        position: "top",
+        isClosable: true,
+      });
     }
     let isCorrectEmail = validateEmail(email);
     if (!isCorrectEmail) {
-      alert("inValid Email:");
-      return;
+      return toast({
+        title: "Signup  Status.",
+        description: "Please write valid email type.",
+        status: "error",
+        duration: 2000,
+        position: "top",
+        isClosable: true,
+      });
     }
     console.log("signup Data2: ", signUpData);
     dispatch(userSignupActionFn(signUpData))
       .then((res) => {
+        if (res.type === "USER_SIGNUP_SUCCESS") {
+          toast({
+            title: "Signup Status.",
+            description: "Your account created successfully.",
+            status: "success",
+            duration: 20000,
+            position: "top",
+            isClosable: true,
+          });
+          navigate("/login");
+        } else {
+          toast({
+            title: "Signup Status.",
+            description: "Something went wrong please try again.",
+            status: "error",
+            duration: 2000,
+            position: "top",
+            isClosable: true,
+          });
+        }
         console.log("Signupres: ", res);
       })
       .catch((err) => {
-        console.log("signup Error: ", err);
+        return toast({
+          title: "Signup Status.",
+          description: "Something went wrong please try again.",
+          status: "error",
+          duration: 2000,
+          position: "top",
+          isClosable: true,
+        });
       });
   };
   const x = process.env.REACT_APP_BASE_URL;
@@ -150,7 +196,7 @@ export default function Signup() {
                   bg: "blue.500",
                 }}
               >
-                Sign up
+                {isAuthLoading ? <Spinner /> : "SIGN UP"}
               </Button>
             </Stack>
             <Stack pt={6}>

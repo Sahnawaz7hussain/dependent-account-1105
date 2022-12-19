@@ -14,9 +14,10 @@ import { ProductComponent } from "../Components/Productspage/ProductComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 // import { useNavigate } from "react-router";
-import LoadingComp from "../Components/Productspage/LoadingComponent";
+// import LoadingComp from "../Components/Productspage/LoadingComponent";
 import { SiderBar } from "./../Components/Productspage/SiderBar";
 import { getProductsActionFn } from "../Redux/ProductReducer/ProductAction";
+import Loading from "../Components/Loading";
 
 export const ProductsPage = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ export const ProductsPage = () => {
   //  below this we user search params for products
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const [filter = "1", setfilter] = useState(searchParams.get("filter"));
+  const [filter, setfilter] = useState(searchParams.get("filter"));
   const [brand, setbrand] = useState(searchParams.getAll("brand"));
   const [category, setcategory] = useState(searchParams.getAll("category"));
   const [loading, setLoading] = useState(false);
@@ -56,9 +57,14 @@ export const ProductsPage = () => {
 
   useEffect(() => {
     setLoading(false);
+    const setp = {};
+    brand && (setp.brand = brand);
+    filter && (setp.filter = filter);
+    category && (setp.category = category);
     if (filter != null || brand.length !== 0 || category !== 0) {
       setSearchParams(
-        { brand: brand, category: category, filter: filter },
+        // { brand: brand, category: category, filter: filter },
+        setp,
         { replace: true }
       );
       const params = {
@@ -73,10 +79,11 @@ export const ProductsPage = () => {
   }, [brand, searchParams, filter, category, setSearchParams]);
 
   return (
-    <Box width={"100%"}>
-      {data.product?.length == 0 ? (
+    <Box width={"100%"} mt={"90px"}>
+      {/* LOADING COMPONENT  */}
+      {data.product?.length === 0 ? (
         <Box width="98%">
-          <LoadingComp />
+          <Loading />
         </Box>
       ) : (
         <Box width={"75%"} margin="auto" mt="1rem">

@@ -12,6 +12,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import PayingCard from "./PayingCard";
+import { useNavigate } from "react-router-dom";
 let methods = [
   {
     method: "card",
@@ -30,15 +31,17 @@ let methods = [
 const PaymentMethod = () => {
   const [pmethod, setPmethod] = useState("card");
   const toast = useToast();
+  const navigate = useNavigate();
   const handlePayment = () => {
     toast({
       title: "Order Status.",
       description: "Your order placed successfully.",
       status: "success",
-      duration: 9000,
+      duration: 2000,
       isClosable: true,
       position: "top",
     });
+    navigate("/ordersuccess");
   };
   return (
     <Box

@@ -2,8 +2,9 @@ import * as types from "./cartActionsType";
 import axios from "axios";
 import headers from "../../utils/headers";
 let base_url = process.env.REACT_APP_BASE_URL;
+//console.log("headr: ", headers);
 
-const getCartItemsActionFn = (headers) => (dispatch) => {
+const getCartItemsActionFn = () => (dispatch) => {
   // console.log("action header:", headers);
   dispatch({ type: types.GET_CART_ITEMS_REQUEST });
   return axios

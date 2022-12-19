@@ -12,14 +12,15 @@ import BottomCarousel from "../Components/Homepage/BottomCarousel";
 import { BrandStore } from "../Components/Homepage/BrandStore";
 import Read from "../Components/Homepage/Read.jsx";
 import { Menus } from "../Components/Homepage/Menus";
-import  Navbar  from "../Components/Navbar";
 
 const Homepage = () => {
   return (
-    <div style={{width:"80%", margin:"auto"}}>
-      <br /><br />
+    <div style={{ width: "80%", margin: "auto" }}>
+      <br />
+      <br />
       {/* <Navbar /> */}
-      <br /><br />
+      <br />
+      <br />
       <Slider />
       <br />
       <br />
