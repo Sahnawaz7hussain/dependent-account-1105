@@ -1,6 +1,6 @@
 # _The Finest_ (Clone) as _Team Finest_
 
-**ASOS is an online fashion retailer which sells clothes online, from its own home lines and from a variety of different brands. In this article we will conduct a brief website analysis of the ASOS website.**
+**Finest is an online E-commerse retailer which sells fruits and vegetables online, from its own home lines and from a variety of different category. In this article we will conduct a brief website analysis of the BigBasket website.**
 
 **User can `sign` in or `sign` up using `google sign in` or through `email verification`.**
 
@@ -107,4 +107,4 @@
 
 # Acknowledgement
 
-- _We take all the responsibility for every single line of code. The Design inspire from `Asos`._
+- _We take all the responsibility for every single line of code. The Design inspire from `Finest`._
