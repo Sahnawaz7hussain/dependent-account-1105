@@ -232,8 +232,8 @@ export const ProductDetails = () => {
                   {/* </Link> */}
                   <Button
                     ml="5px"
-                    bg={useColorModeValue("white")}
-                    color={useColorModeValue("gray.900")}
+                    bg={"white"}
+                    color={"gray.900"}
                     rounded="0"
                     border="1px solid #84c225"
                   >
