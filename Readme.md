@@ -35,6 +35,7 @@
    <td align=center> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/768px-Bootstrap_logo.svg.png"  height=100    ></td>
   <td align=center> <img src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png"  height=100  ></td>
   <td align=center> <img src="https://img.icons8.com/plasticine/100/null/github.png"  height=100  ></td>
+  <td align=center> <img src="https://img.icons8.com/plasticine/100/null/github.png"  height=100  ></td>
 
 </table>
 
@@ -54,10 +55,14 @@
   - `REACT` _To learn React,please checkout this_ [React Documentation](https://reactjs.org/)
   - `REDUX` _To learn Redux,please checkout this_ [Redux Documentation](https://redux.js.org/)
   - `CHAKRA-UI`_To learn React,please checkout this_ [Chakra-ui Documentation](https://chakra-ui.com/)
+  - `Versel Deploye`
 - ### **Backend**
-  - `Render server.json`
   - `NPM`
-  - `Firebase`
+  - `Mongoose`
+  - `MongoDB`
+  - `ExpressJS`
+  - `NodeJS`
+  - `Cyclic deployed`
 
 <!-- - ### **Integration** -->
 
