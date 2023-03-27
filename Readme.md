@@ -7,17 +7,17 @@
 ## Project look like this
 
 <table  align=center >
-<td align=center><img src="https://github.com/Sahnawaz7hussain/dependent-account-1105/blob/master/Assests/image3.png?raw=true" alt="womansPage"  height=300   width=450 />
+<td align=center><img src="https://user-images.githubusercontent.com/101489367/227882316-012e1102-f32a-44d5-9ed8-98d69c4b4792.png" alt="womansPage"  height=300   width=450 />
 <p>Home Page</p>
 </td>
-<td align=center><img src="https://github.com/Sahnawaz7hussain/dependent-account-1105/blob/master/Assests/image1.png?raw=true" alt="womansPage"  height=300   width=450 />
+<td align=center><img src="https://user-images.githubusercontent.com/101489367/227882623-753c26e3-72ce-401c-ad18-52b7cf596611.png" alt="womansPage"  height=300   width=450 />
 <p>Product Page</p>
 </td>
 <tr>
- <td align=center><img src="https://github.com/Sahnawaz7hussain/dependent-account-1105/blob/master/Assests/image2.png?raw=true" alt="womansPage"  height=300   width=450 />
-<p>Cart Page</p>
+ <td align=center><img src="https://user-images.githubusercontent.com/101489367/227882875-06fa68b2-710a-4d1e-9e1c-dbb23cd58970.png" alt="womansPage"  height=300   width=450 />
+<p>Cart Page(Dark theme enabled)</p>
 </td>
-<td align=center><img src="https://github.com/Sahnawaz7hussain/dependent-account-1105/blob/master/Assests/image4.png?raw=true" alt="womansPage"  height=300   width=450 />
+<td align=center><img src="https://user-images.githubusercontent.com/101489367/227883205-1547375e-9d7c-4a60-84f5-393a678de57c.png" alt="womansPage"  height=300   width=450 />
 <p>Admin Page</p>
 </td>
 
